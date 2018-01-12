@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 623326171}
   - component: {fileID: 623326170}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: '[CAMERA]'
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 1519605185}
   - component: {fileID: 1519605188}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: '[MANAGER]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 1746034366}
   - component: {fileID: 1746034365}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: '[UI]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

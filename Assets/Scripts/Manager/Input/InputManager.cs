@@ -46,5 +46,10 @@ public class InputManager : MonoBehaviour
 
         return axisInput;
     }
+
+    public bool GetButton(string buttonName)
+    {
+        return Input.GetButton(buttonName);
+    }
     #endregion
 }

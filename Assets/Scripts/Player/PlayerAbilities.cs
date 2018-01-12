@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerAbilities : MonoBehaviour {
 
     private Rigidbody2D _rigidbody;
-    private Player _player;
 
     [Header("Fire")]
     Transform firePoint;
+    public Usable usableItem;
 
     [Header("Dash")]
     public const float MAX_BOOST_SPEED = 200;
@@ -19,46 +19,56 @@ public class PlayerAbilities : MonoBehaviour {
     float boostCurrentCooldown = 0;
 
     [Header("ShockWave")]
-    public const float MAX_SHOCKWAVE_STRENGHT = 200;
     public const float SHOCKWAVE_COOLDOWN = 3f;
+    public const float SHOCKWAVE_DURATION = 0.5f;
+    public const float SHOCKWAVE_MAX_STRENGHT = 20000;
+    public const float SHOCKWAVE_MIN_RADIUS = 0.0f;
+    public const float SHOCKWAVE_MAX_RADIUS = 0.5f;
     float shockWaveCurrentCooldown = 0;
 
-    private void Start()
+    void Start()
     {
         firePoint = transform.GetChild(0);
         _rigidbody = transform.GetComponent<Rigidbody2D>();
-        _player = transform.GetComponent<Player>();
-    }
-    private void Update()
-    {
-        if (_player.playerID == 2)
-            return;
-        Dash();
-        Fire();
     }
 
-    #region Fire
-    void Fire()
+    void Update()
     {
-        /*if (InputManager.instance.GetAxis("Joy" + _player.playerID + "TriggerRight") > 0 && currentWeapon != null)
-            currentWeapon.Use(firePoint.position);*/
+        DashCooldown();
+        ShockWaveCooldown();
+    }
+
+    #region Item
+    public void GetItem(GameObject droppedItem)
+    {
+        GameObject Item = Instantiate(droppedItem, transform.position, Quaternion.identity);
+        Item.transform.parent = transform;
+        usableItem = droppedItem.GetComponent<Usable>();
+        usableItem.OnUsed += ReleaseItem;
+    }
+
+    public void ReleaseItem()
+    {
+        usableItem = null;
+        Destroy(usableItem);
+    }
+
+    public void UseItem()
+    {
+        if (usableItem != null)
+            usableItem.Use(firePoint.position);
     }
     #endregion
 
     #region Dash
-    void Dash()
+    public void Dash(Vector2 movement, float intensity)
     {
-        if (InputManager.instance.GetAxis("Joy" + _player.playerID + "TriggerLeft") > 0 && boostAvailable > 0)
+        if (boostAvailable > 0)
         {
-            Vector2 movement = InputManager.instance.GetThumstickAxis("Joy" + _player.playerID + "LeftThumbstickX", "Joy" + _player.playerID + "LeftThumbstickY");
-            float consumption = Mathf.Lerp(0, boostAvailable, InputManager.instance.GetAxis("Joy" + _player.playerID + "TriggerLeft"));
+            float consumption = Mathf.Lerp(0, boostAvailable, intensity);
             boostAvailable -= consumption;
             _rigidbody.AddForce(movement * consumption * 10);
-            boostCurrentCooldown = 0;
-        }
-        else
-        {
-            DashCooldown();
+            boostCurrentCooldown = MAX_BOOST_COOLDOWN;
         }
     }
 
@@ -67,8 +77,8 @@ public class PlayerAbilities : MonoBehaviour {
         if (boostAvailable == MAX_BOOST_SPEED)
             return;
 
-        boostCurrentCooldown += TimeManager.instance.time;
-        if (boostCurrentCooldown > BOOST_COOLDOWN_TIME)
+        boostCurrentCooldown -= TimeManager.instance.time;
+        if (boostCurrentCooldown < 0)
         {
             boostAvailable += BOOST_COOLDOWN_RATE;
         }
@@ -76,34 +86,45 @@ public class PlayerAbilities : MonoBehaviour {
     #endregion
 
     #region ShockWave
-    void ShockWave()
+    public void ShockWave()
     {
-        if (InputManager.instance.GetAxis("Joy" + _player.playerID + "BumperRight") > 0 && shockWaveCurrentCooldown > SHOCKWAVE_COOLDOWN)
+        if (shockWaveCurrentCooldown <= 0)
         {
-            Debug.DrawRay(firePoint.position, transform.right * 10000, Color.red);
-            RaycastHit2D hit = Physics2D.Raycast(firePoint.position, transform.right);
-            if (hit.collider != null)
-            {
-                Debug.Log(hit.transform.name);
-            }
-            shockWaveCurrentCooldown = 0;
+            shockWaveCurrentCooldown = SHOCKWAVE_COOLDOWN;
+            StartCoroutine(ShockWaveEffect());
         }
-        else
+    }
+
+    IEnumerator ShockWaveEffect()
+    {
+        float timer = 0;
+
+        List<Transform> IgnoreCollision = new List<Transform>();
+        IgnoreCollision.Add(transform);
+
+        while (timer < SHOCKWAVE_DURATION)
         {
-            ShockWaveCooldown();
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), Mathf.Lerp(SHOCKWAVE_MIN_RADIUS, SHOCKWAVE_MAX_RADIUS, timer / SHOCKWAVE_DURATION), 1 << LayerMask.NameToLayer("Player"));
+            int i = 0;
+            Debug.Log(hitColliders);
+            while (i < hitColliders.Length)
+            {
+                if (hitColliders[i].transform.CompareTag("Player") && !IgnoreCollision.Contains(hitColliders[i].transform))
+                {
+                    Vector2 dir = (hitColliders[i].transform.position - transform.position).normalized;
+                    float power = (SHOCKWAVE_MAX_STRENGHT * (timer / SHOCKWAVE_DURATION));
+                    hitColliders[i].transform.GetComponent<Player>().Damage(dir, power);
+                }
+                i++;
+            }
+            timer += TimeManager.instance.time;
+            yield return null;
         }
     }
 
     void ShockWaveCooldown()
     {
-        shockWaveCurrentCooldown += TimeManager.instance.time;
-    }
-    #endregion
-
-    #region Drop
-    void DropItem()
-    {
-
+        shockWaveCurrentCooldown -= TimeManager.instance.time;
     }
     #endregion
 }

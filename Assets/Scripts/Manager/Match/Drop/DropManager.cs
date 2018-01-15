@@ -29,7 +29,7 @@ public class DropManager : MonoBehaviour {
     {
         SpriteRenderer spriteRenderer = DroppableArea.GetComponent<SpriteRenderer>();
         Vector3 SpawnLocation = GetPointOnDroppableArea(spriteRenderer);
-        GameObject droppedItem = Instantiate(DroppablePrefab, SpawnLocation, Quaternion.identity);
+        Instantiate(DroppablePrefab, SpawnLocation, Quaternion.identity);
     }
 
     Vector3[] GetSpriteSize(SpriteRenderer sp)

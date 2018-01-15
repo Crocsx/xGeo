@@ -22,30 +22,33 @@ public class CameraTop : MonoBehaviour {
     #endregion
 
     #region Native Methods
-    void Start () {
-        GameObject[] playersArray = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < playersArray.Length; i++)
-        {
-            players.Add(playersArray[i].GetComponent<Player>());
-        }
-
+    void Start()
+    {
         _camera = transform.gameObject.GetComponent<Camera>();
+        MatchManager.instance.OnPlayerSpawned += AddPlayer;
+        MatchManager.instance.OnPlayerKilled += RemovePlayer;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Setup()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (players.Count <= 0)
+            return;
+
         Vector2 center = GetPlayersCentroid();
         float maxDistance = GetPlayersMaxDistance(center) + MAX_DISTANCE_BORDER_OFFSET;
 
-       // Debug.Log(maxDistance);
+        // Debug.Log(maxDistance);
         Vector2 newPosition = Vector2.Lerp(transform.position, center, TimeManager.instance.time * cameraSpeed);
         transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
         _camera.orthographicSize = Mathf.Clamp(maxDistance, MINIMUM_ALTITUDE, MAXIMUM_ALTITUDE);
         //Mathf.Lerp(MINIMUM_ALTITUDE, MAXIMUM_ALTITUDE, maxDistance / (MINIMUM_ALTITUDE - MAXIMUM_ALTITUDE));
-
-
-
     }
     #endregion
 

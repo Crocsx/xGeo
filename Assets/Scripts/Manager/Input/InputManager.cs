@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InputManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class InputManager : MonoBehaviour
 
     #region Variables
     public const float AXIS_DEAD_ZONE = 0.25f;
+    public const float MAX_CONTROLLER = 2;
+    public List<int> assignedController = new List<int>();
     #endregion
 
     #region Singleton Initialization 
@@ -23,6 +26,26 @@ public class InputManager : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
     }
     #endregion
+
+    void Update()
+    {
+        CheckNewController();
+    }
+
+    void CheckNewController()
+    {
+        for (var i = 1; i < MAX_CONTROLLER; i++)
+        {
+            if (assignedController.Contains(i))
+                continue;
+
+            if (InputManager.instance.GetButton("Joy" + i + "A"))
+            {
+                Debug.Log("Add new player on controller" +i);
+                assignedController.Add(i);
+            }
+        }
+    }
 
     #region Methods
     public Vector2 GetThumstickAxis(string nameAxis1, string nameAxis2)

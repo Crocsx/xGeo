@@ -12,16 +12,20 @@ public class WeaponLaser : Usable
     protected override void Start()
     {
         base.Start();
+        Debug.Log("start");
         fireCurrentShoot = SHOOT_AVAILABLE;
+        Debug.Log("fireCurrentShoot" + fireCurrentShoot);
     }
 
     protected override void Update()
     {
         base.Update();
+        Debug.Log("Update" + fireCurrentShoot);
     }
 
     public override void Use(Vector3 shootPosition)
     {
+        Debug.Log("Use" + fireCurrentShoot);
         base.Use(shootPosition);
         if (fireCurrentCooldown <= 0)
         {

@@ -7,28 +7,19 @@ public class Item
 {
     public GameObject prefab;
     public Sprite sprite;
-    public float ratio;
 }
 
-public class Drop : MonoBehaviour {
-
-
+public class Drop : MonoBehaviour
+{
     public Item[] possibleItems;
     Item selectedItem;
-    SpriteRenderer spriteRenderer;
     GameObject itemType;
 
     // Use this for initialization
     void Start () {
-        spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         selectedItem = GetRandomItem();
-        spriteRenderer.sprite = selectedItem.sprite;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = selectedItem.sprite;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     Item GetRandomItem()
     {

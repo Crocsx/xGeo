@@ -4,48 +4,49 @@ using UnityEngine;
 
 public class WeaponLaser : Usable
 {
-    const int SHOOT_AVAILABLE = 5;
-    const float FIRE_COOLDOWN = 1;
-    float fireCurrentCooldown = 0.0f;
-    int fireCurrentShoot = 0;
+    float SHOOT_MAX_COOLDOWN = 1.0f;
+    int SHOOT_MAX_NUMBER = 5;
+    int SHOOT_POWER = 90;
 
+    int currentShoot;
+    float currentCooldown;
+
+    // Use this for initialization
     protected override void Start()
     {
         base.Start();
-        Debug.Log("start");
-        fireCurrentShoot = SHOOT_AVAILABLE;
-        Debug.Log("fireCurrentShoot" + fireCurrentShoot);
+        currentShoot = SHOOT_MAX_NUMBER;
     }
 
+    // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        Debug.Log("Update" + fireCurrentShoot);
+        FireCooldown();
     }
 
     public override void Use(Vector3 shootPosition)
     {
-        Debug.Log("Use" + fireCurrentShoot);
         base.Use(shootPosition);
-        if (fireCurrentCooldown <= 0)
+        if (currentCooldown <= 0)
         {
             Debug.DrawRay(shootPosition, transform.right * 10000, Color.red);
             RaycastHit2D hit = Physics2D.Raycast(shootPosition, transform.right, 1 << LayerMask.NameToLayer("Player"));
             if (hit.collider != null)
             {
-                Debug.Log(hit.transform.name);
+                hit.transform.GetComponent<Player>().Damage((transform.right - hit.transform.position).normalized, SHOOT_POWER);
             }
-            fireCurrentCooldown = FIRE_COOLDOWN;
-            fireCurrentShoot--;
+            currentCooldown = SHOOT_MAX_COOLDOWN;
+            currentShoot--;
 
-            if (fireCurrentShoot < 0)
-                base.Used();
+            if (currentShoot <= 0)
+                Used();
         }
     }
-    
+
     void FireCooldown()
     {
-        if (fireCurrentCooldown > 0)
-            fireCurrentCooldown -= TimeManager.instance.time;
+        if (currentCooldown > 0)
+            currentCooldown -= TimeManager.instance.time;
     }
 }

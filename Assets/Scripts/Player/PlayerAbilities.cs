@@ -8,7 +8,7 @@ public class PlayerAbilities : MonoBehaviour {
 
     [Header("Fire")]
     Transform firePoint;
-    public Usable usableItem;
+    Usable usableItem;
 
     [Header("Dash")]
     public const float MAX_BOOST_SPEED = 200;
@@ -43,14 +43,13 @@ public class PlayerAbilities : MonoBehaviour {
     {
         GameObject Item = Instantiate(droppedItem, transform.position, Quaternion.identity);
         Item.transform.parent = transform;
-        usableItem = droppedItem.GetComponent<Usable>();
+        usableItem = Item.GetComponent<Usable>();
         usableItem.OnUsed += ReleaseItem;
     }
 
     public void ReleaseItem()
     {
         usableItem = null;
-        Destroy(usableItem);
     }
 
     public void UseItem()
@@ -106,7 +105,6 @@ public class PlayerAbilities : MonoBehaviour {
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), Mathf.Lerp(SHOCKWAVE_MIN_RADIUS, SHOCKWAVE_MAX_RADIUS, timer / SHOCKWAVE_DURATION), 1 << LayerMask.NameToLayer("Player"));
             int i = 0;
-            Debug.Log(hitColliders);
             while (i < hitColliders.Length)
             {
                 if (hitColliders[i].transform.CompareTag("Player") && !IgnoreCollision.Contains(hitColliders[i].transform))

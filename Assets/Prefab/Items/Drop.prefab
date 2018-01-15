@@ -100,7 +100,6 @@ MonoBehaviour:
   possibleItems:
   - prefab: {fileID: 1315494517556040, guid: b2a387a31569a564c94c8d73f865ca39, type: 2}
     sprite: {fileID: 21300000, guid: 55818a74d22e7934ba059cf94188f0c6, type: 3}
-    ratio: 0
 --- !u!212 &212803436368018640
 SpriteRenderer:
   m_ObjectHideFlags: 1

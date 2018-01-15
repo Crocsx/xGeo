@@ -983,13 +983,14 @@ GameObject:
   - component: {fileID: 2065470461}
   - component: {fileID: 2065470460}
   - component: {fileID: 2065470459}
+  - component: {fileID: 2065470462}
   m_Layer: 5
   m_Name: '[CONTROLLER]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2065470459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1045,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2065470462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2065470458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f02d45be3fd7944882e987abdcfb1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nbPlayerText: {fileID: 88092196}
+  startButton: {fileID: 1175951859}
 --- !u!1 &2108566436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,7 +1074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2108566437
 RectTransform:
   m_ObjectHideFlags: 0

@@ -17,23 +17,23 @@ public class GameManager : MonoBehaviour
 
     #region Event
     #region Game 
-    public delegate void onGameInit();
-    public event onGameInit OnGameInit;
-    public delegate void onGameStart();
-    public event onGameStart OnGameStart;
-    public delegate void onGamePause();
-    public event onGamePause OnGamePause;
-    public delegate void onGameResume();
-    public event onGameResume OnGameResume;
-    public delegate void onGameEnd();
-    public event onGameEnd OnGameEnd;
+    public delegate void onInitGame();
+    public event onInitGame OnInitGame;
+    public delegate void onStartGame();
+    public event onStartGame OnStartGame;
+    public delegate void onPauseGame();
+    public event onPauseGame OnPauseGame;
+    public delegate void onResumeGame();
+    public event onResumeGame OnResumeGame;
+    public delegate void onEndGame();
+    public event onEndGame OnEndGame;
     #endregion
 
     #region Scene Event
-    public delegate void onSceneLoad(string name);
-    public event onSceneLoad OnSceneLoad;
-    public delegate void onSceneReload(string name);
-    public event onSceneReload OnSceneReload;
+    public delegate void onLoadScene(string name);
+    public event onLoadScene OnLoadScene;
+    public delegate void onReloadScene(string name);
+    public event onReloadScene OnReloadScene;
     public delegate void onSceneLoaded(Scene scene, LoadSceneMode sceneMode);
     public event onSceneLoaded OnSceneLoaded;
     #endregion
@@ -58,32 +58,32 @@ public class GameManager : MonoBehaviour
     #region Game State
     void d_InitGame()
     {
-        if (OnGameInit != null)
-            OnGameInit();
+        if (OnInitGame != null)
+            OnInitGame();
     }
 
     void d_StartGame()
     {
-        if (OnGameStart != null)
-            OnGameStart();
+        if (OnStartGame != null)
+            OnStartGame();
     }
 
     void d_PauseGame()
     {
-        if (OnGamePause != null)
-            OnGamePause();
+        if (OnPauseGame != null)
+            OnPauseGame();
     }
 
     void d_ResumeGame()
     {
-        if (OnGameResume != null)
-            OnGameResume();
+        if (OnResumeGame != null)
+            OnResumeGame();
     }
 
     void d_EndGame()
     {
-        if (OnGameEnd != null)
-            OnGameEnd();
+        if (OnEndGame != null)
+            OnEndGame();
     }
     #endregion
 
@@ -97,8 +97,8 @@ public class GameManager : MonoBehaviour
 
     void d_LoadScene(string LevelName)
     {
-        if (OnSceneLoad != null)
-            OnSceneLoad(LevelName);
+        if (OnLoadScene != null)
+            OnLoadScene(LevelName);
     }
     #endregion
     #endregion
@@ -135,8 +135,8 @@ public class GameManager : MonoBehaviour
     public void ReloadScene()
     {
         string SceneName = SceneManager.GetActiveScene().name;
-        if (OnSceneReload != null)
-            OnSceneReload(SceneName);
+        if (OnReloadScene != null)
+            OnReloadScene(SceneName);
         LoadScene(SceneName);
     }
 

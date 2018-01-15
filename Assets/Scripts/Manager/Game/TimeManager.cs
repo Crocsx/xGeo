@@ -36,8 +36,8 @@ public class TimeManager : MonoBehaviour
     #region Native Methods
     void Start()
     {
-        GameManager.instance.OnGamePause += OnPause;
-        GameManager.instance.OnGameResume += OnResume;
+        GameManager.instance.OnPauseGame += OnPause;
+        GameManager.instance.OnResumeGame += OnResume;
         _time = 0;
         _modifier = 1;
     }

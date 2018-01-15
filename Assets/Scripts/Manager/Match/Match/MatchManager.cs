@@ -46,7 +46,8 @@ public class MatchManager : MonoBehaviour
 
     void Start()
     {
-        MatchStart();
+        GameManager.instance.OnStartGame += MatchStart;
+        GameManager.instance.StartGame();
     }
 
     public void MatchStart()

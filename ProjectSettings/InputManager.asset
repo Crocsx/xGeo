@@ -103,10 +103,10 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: Joy1A
-    descriptiveName: joystick button 0
+    descriptiveName: joystick 1 button 0
     descriptiveNegativeName: 
-    negativeButton: joystick button 0
-    positiveButton: 
+    negativeButton: 
+    positiveButton: joystick 1 button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
@@ -119,10 +119,10 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: Joy1B
-    descriptiveName: joystick button 1
+    descriptiveName: joystick 1 button 1
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 1
+    positiveButton: joystick 1 button 1
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
@@ -135,10 +135,10 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: Joy1BumperRight
-    descriptiveName: joystick button 5
+    descriptiveName: joystick 1 button 5
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 5
+    positiveButton: joystick 1 button 5
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
@@ -151,10 +151,10 @@ InputManager:
     joyNum: 1
   - serializedVersion: 3
     m_Name: Joy1Start
-    descriptiveName: joystick button 7
+    descriptiveName: joystick 1 button 7
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 7
+    positiveButton: joystick 1 button 7
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
@@ -193,7 +193,7 @@ InputManager:
     dead: 0.1
     sensitivity: 1
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 2
@@ -225,7 +225,7 @@ InputManager:
     dead: 0.1
     sensitivity: 1
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 4
     joyNum: 2
@@ -263,10 +263,10 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: Joy2A
-    descriptiveName: joystick button 0
+    descriptiveName: joystick 2 button 0
     descriptiveNegativeName: 
-    negativeButton: joystick button 0
-    positiveButton: 
+    negativeButton: 
+    positiveButton: joystick 2 button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
@@ -279,10 +279,10 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: Joy2B
-    descriptiveName: joystick button 1
+    descriptiveName: joystick 2 button 1
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 1
+    positiveButton: joystick 2 button 1
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
@@ -295,10 +295,10 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: Joy2BumperRight
-    descriptiveName: joystick button 5
+    descriptiveName: joystick 2 button 5
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 5
+    positiveButton: joystick 2 button 5
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
@@ -311,10 +311,10 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: Joy2Start
-    descriptiveName: joystick button 7
+    descriptiveName: joystick 2 button 7
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 7
+    positiveButton: joystick 2 button 7
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0

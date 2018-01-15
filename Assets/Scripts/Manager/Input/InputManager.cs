@@ -34,12 +34,14 @@ public class InputManager : MonoBehaviour
 
     void CheckNewController()
     {
-        for (var i = 1; i < MAX_CONTROLLER; i++)
+        Debug.Log("Joy1Start " + InputManager.instance.GetButton("Joy1Start"));
+        Debug.Log("Joy2Start "+InputManager.instance.GetButton("Joy2Start"));
+        for (var i = 1; i <= MAX_CONTROLLER; i++)
         {
             if (assignedController.Contains(i))
                 continue;
 
-            if (InputManager.instance.GetButton("Joy" + i + "A"))
+            if (InputManager.instance.GetButton("Joy" + i + "Start"))
             {
                 Debug.Log("Add new player on controller" +i);
                 assignedController.Add(i);

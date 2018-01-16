@@ -79,7 +79,7 @@ public class MatchManager : MonoBehaviour
         if (OnPlayerSpawned != null)
             OnPlayerSpawned(nPlayer);
 
-        return null;
+        return nPlayer;
     }
 
     Vector3 GetSpawnLocation(int i)

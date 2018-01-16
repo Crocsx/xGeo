@@ -7,10 +7,10 @@ public class PlayerMovement : MonoBehaviour {
     private Rigidbody2D _rigidbody;
 
     [Header("Move")]
-    public const float MAX_MOVE_SPEED = 50;
+    public const float MAX_MOVE_SPEED = 80;
 
     [Header("Rotation")]
-    public const float MAX_ROTATION_SPEED = 50;
+    public const float MAX_ROTATION_SPEED = 80;
 
     void Start () {
         _rigidbody = transform.GetComponent<Rigidbody2D>();

@@ -24,6 +24,7 @@ public class PlayerAbilities : MonoBehaviour {
     public const float SHOCKWAVE_MAX_STRENGHT = 20000;
     public const float SHOCKWAVE_MIN_RADIUS = 0.0f;
     public const float SHOCKWAVE_MAX_RADIUS = 0.5f;
+    public GameObject SHOCKWAVE_ANIMATION;
     float shockWaveCurrentCooldown = 0;
 
     void Start()
@@ -90,6 +91,7 @@ public class PlayerAbilities : MonoBehaviour {
         if (shockWaveCurrentCooldown <= 0)
         {
             shockWaveCurrentCooldown = SHOCKWAVE_COOLDOWN;
+            Instantiate(SHOCKWAVE_ANIMATION, transform.position, Quaternion.identity);
             StartCoroutine(ShockWaveEffect());
         }
     }

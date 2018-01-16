@@ -22,7 +22,7 @@ public class CameraTop : MonoBehaviour {
     #endregion
 
     #region Native Methods
-    void Start()
+    void Awake()
     {
         _camera = transform.gameObject.GetComponent<Camera>();
         MatchManager.instance.OnPlayerSpawned += AddPlayer;

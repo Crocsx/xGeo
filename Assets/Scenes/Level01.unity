@@ -1207,7 +1207,7 @@ MonoBehaviour:
   players: []
   cameraSpeed: 3
   MINIMUM_ALTITUDE: 20
-  MAXIMUM_ALTITUDE: 60
+  MAXIMUM_ALTITUDE: 50
   MAX_DISTANCE_BORDER_OFFSET: 4
 --- !u!1 &1849932711
 GameObject:

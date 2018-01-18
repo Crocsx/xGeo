@@ -11,7 +11,7 @@ public class PlayerAbilities : MonoBehaviour {
     Usable usableItem;
 
     [Header("Dash")]
-    public const float MAX_BOOST_SPEED = 200;
+    public const float MAX_BOOST_SPEED = 250;
     public const float MAX_BOOST_COOLDOWN = 3;
     public const float BOOST_COOLDOWN_TIME = 1f;
     public const float BOOST_COOLDOWN_RATE = 10f;
@@ -21,9 +21,9 @@ public class PlayerAbilities : MonoBehaviour {
     [Header("ShockWave")]
     public const float SHOCKWAVE_COOLDOWN = 3f;
     public const float SHOCKWAVE_DURATION = 0.5f;
-    public const float SHOCKWAVE_MAX_STRENGHT = 20000;
+    public const float SHOCKWAVE_MAX_STRENGHT = 200;
     public const float SHOCKWAVE_MIN_RADIUS = 0.0f;
-    public const float SHOCKWAVE_MAX_RADIUS = 0.5f;
+    public const float SHOCKWAVE_MAX_RADIUS = 3f;
     public GameObject SHOCKWAVE_ANIMATION;
     float shockWaveCurrentCooldown = 0;
 
@@ -45,6 +45,7 @@ public class PlayerAbilities : MonoBehaviour {
         GameObject Item = Instantiate(droppedItem, transform.position, Quaternion.identity);
         Item.transform.parent = transform;
         usableItem = Item.GetComponent<Usable>();
+        usableItem.launcher = transform.GetComponent<Player>();
         usableItem.OnUsed += ReleaseItem;
     }
 
@@ -91,7 +92,7 @@ public class PlayerAbilities : MonoBehaviour {
         if (shockWaveCurrentCooldown <= 0)
         {
             shockWaveCurrentCooldown = SHOCKWAVE_COOLDOWN;
-            Instantiate(SHOCKWAVE_ANIMATION, transform.position, Quaternion.identity);
+            Instantiate(SHOCKWAVE_ANIMATION, transform.position, Quaternion.identity).transform.parent = transform;
             StartCoroutine(ShockWaveEffect());
         }
     }
@@ -106,9 +107,11 @@ public class PlayerAbilities : MonoBehaviour {
         while (timer < SHOCKWAVE_DURATION)
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), Mathf.Lerp(SHOCKWAVE_MIN_RADIUS, SHOCKWAVE_MAX_RADIUS, timer / SHOCKWAVE_DURATION), 1 << LayerMask.NameToLayer("Player"));
+      
             int i = 0;
             while (i < hitColliders.Length)
             {
+                Debug.Log(hitColliders);
                 if (hitColliders[i].transform.CompareTag("Player") && !IgnoreCollision.Contains(hitColliders[i].transform))
                 {
                     Vector2 dir = (hitColliders[i].transform.position - transform.position).normalized;

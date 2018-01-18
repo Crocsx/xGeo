@@ -7,6 +7,9 @@ public class Usable : MonoBehaviour
     public event onUsed OnUsed;
     public delegate void onUsed();
 
+    [HideInInspector]
+    public Player launcher;
+
     protected virtual void Start()
     {
     }

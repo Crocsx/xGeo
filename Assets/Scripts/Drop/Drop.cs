@@ -23,7 +23,7 @@ public class Drop : MonoBehaviour
 
     Item GetRandomItem()
     {
-        return possibleItems[0];
+        return possibleItems[Random.Range(0, possibleItems.Length)];
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

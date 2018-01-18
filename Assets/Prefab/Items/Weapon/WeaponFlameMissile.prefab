@@ -9,45 +9,48 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1315494517556040}
+  m_RootGameObject: {fileID: 1089077180627834}
   m_IsPrefabParent: 1
---- !u!1 &1315494517556040
+--- !u!1 &1089077180627834
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4150287509974960}
-  - component: {fileID: 114019845107981478}
+  - component: {fileID: 4261265210928440}
+  - component: {fileID: 114739820207027118}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: WeaponFlameMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4150287509974960
+--- !u!4 &4261265210928440
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315494517556040}
+  m_GameObject: {fileID: 1089077180627834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.55148, y: 3.546747, z: -0.3347555}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114019845107981478
+--- !u!114 &114739820207027118
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315494517556040}
+  m_GameObject: {fileID: 1089077180627834}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b1fd0a7563bdb741883eb6fb9830ff4, type: 3}
+  m_Script: {fileID: 11500000, guid: e92563a7f1f85c0478342e98996378ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  launcher: {fileID: 0}
+  flameMissile: {fileID: 1206919574526100, guid: b1f633a96fdb9c046a91481a570bb0fb,
+    type: 2}

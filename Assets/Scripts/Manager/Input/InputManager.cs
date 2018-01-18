@@ -7,6 +7,9 @@ public class InputManager : MonoBehaviour
 
     public static InputManager instance;
 
+    public delegate void onNewController(int i);
+    public event onNewController OnNewController;
+
     #region Variables
     public const float AXIS_DEAD_ZONE = 0.25f;
     public const float MAX_CONTROLLER = 2;
@@ -34,8 +37,6 @@ public class InputManager : MonoBehaviour
 
     void CheckNewController()
     {
-        Debug.Log("Joy1Start " + InputManager.instance.GetButton("Joy1Start"));
-        Debug.Log("Joy2Start "+InputManager.instance.GetButton("Joy2Start"));
         for (var i = 1; i <= MAX_CONTROLLER; i++)
         {
             if (assignedController.Contains(i))
@@ -43,8 +44,9 @@ public class InputManager : MonoBehaviour
 
             if (InputManager.instance.GetButton("Joy" + i + "Start"))
             {
-                Debug.Log("Add new player on controller" +i);
                 assignedController.Add(i);
+                if(OnNewController != null)
+                    OnNewController(i);
             }
         }
     }

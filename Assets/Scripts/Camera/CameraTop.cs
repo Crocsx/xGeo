@@ -25,8 +25,11 @@ public class CameraTop : MonoBehaviour {
     void Awake()
     {
         _camera = transform.gameObject.GetComponent<Camera>();
-        MatchManager.instance.OnPlayerSpawned += AddPlayer;
-        MatchManager.instance.OnPlayerKilled += RemovePlayer;
+        for(var i = 0; i < PlayersManager.instance.players.Count; i++)
+        {
+            PlayersManager.instance.players[i].OnPlayerRespawned += AddPlayer;
+            PlayersManager.instance.players[i].OnPlayerKilled += RemovePlayer;
+        }
     }
 
     void Setup()

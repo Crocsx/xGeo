@@ -5,17 +5,23 @@ using UnityEngine;
 public class PlayerDamage : MonoBehaviour {
 
     float multiplicator = 0;
-    Rigidbody2D _rigidbody;
+    Player _player;
 
     void Start()
     {
-        _rigidbody = transform.GetComponent<Rigidbody2D>();
+        _player = transform.GetComponent<Player>();
+        _player.OnResetPlayer += ResetDamage;
     }
 
     // Update is called once per frame
     public void GetDamage(Vector2 dir, float power)
     {
         multiplicator += power / 10;
-        _rigidbody.AddForce(dir * power * multiplicator);
+        _player._pRigidbody.AddForce(dir * power * multiplicator);
+    }
+
+    void ResetDamage()
+    {
+
     }
 }

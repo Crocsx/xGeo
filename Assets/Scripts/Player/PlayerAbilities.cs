@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAbilities : MonoBehaviour {
-
-    private Rigidbody2D _rigidbody;
+public class PlayerAbilities : MonoBehaviour
+{
+    Player _player;
 
     [Header("Fire")]
     Transform firePoint;
@@ -30,7 +30,8 @@ public class PlayerAbilities : MonoBehaviour {
     void Start()
     {
         firePoint = transform.GetChild(0);
-        _rigidbody = transform.GetComponent<Rigidbody2D>();
+        _player = transform.GetComponent<Player>();
+        _player.OnResetPlayer += ResetAbilities;
     }
 
     void Update()
@@ -68,7 +69,7 @@ public class PlayerAbilities : MonoBehaviour {
         {
             float consumption = Mathf.Lerp(0, boostAvailable, intensity);
             boostAvailable -= consumption;
-            _rigidbody.AddForce(movement * consumption * 10);
+            _player._pRigidbody.AddForce(movement * consumption * 10);
             boostCurrentCooldown = MAX_BOOST_COOLDOWN;
         }
     }
@@ -101,18 +102,14 @@ public class PlayerAbilities : MonoBehaviour {
     {
         float timer = 0;
 
-        List<Transform> IgnoreCollision = new List<Transform>();
-        IgnoreCollision.Add(transform);
-
         while (timer < SHOCKWAVE_DURATION)
         {
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), Mathf.Lerp(SHOCKWAVE_MIN_RADIUS, SHOCKWAVE_MAX_RADIUS, timer / SHOCKWAVE_DURATION), 1 << LayerMask.NameToLayer("Player"));
-      
+
             int i = 0;
             while (i < hitColliders.Length)
             {
-                Debug.Log(hitColliders);
-                if (hitColliders[i].transform.CompareTag("Player") && !IgnoreCollision.Contains(hitColliders[i].transform))
+                if (hitColliders[i].transform.CompareTag("Player") && transform != hitColliders[i].transform)
                 {
                     Vector2 dir = (hitColliders[i].transform.position - transform.position).normalized;
                     float power = (SHOCKWAVE_MAX_STRENGHT * (timer / SHOCKWAVE_DURATION));
@@ -128,6 +125,17 @@ public class PlayerAbilities : MonoBehaviour {
     void ShockWaveCooldown()
     {
         shockWaveCurrentCooldown -= TimeManager.instance.time;
+    }
+    #endregion
+
+    #region Reset
+    void ResetAbilities()
+    {
+        boostAvailable = MAX_BOOST_SPEED;
+        boostCurrentCooldown = 0;
+
+        shockWaveCurrentCooldown = 0;
+        usableItem = null;
     }
     #endregion
 }

@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 1
+  explosion: {fileID: 1916332766378372, guid: b405aeb52f720c8449021b0db7100050, type: 2}
 --- !u!114 &114513468487195774
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -43,6 +43,6 @@ public class Missile : MonoBehaviour {
 
     void Movement()
     {
-        transform.position += transform.right * MISSILE_SPEED;
+        transform.position += transform.right * MISSILE_SPEED * TimeManager.instance.time;
     }
 }

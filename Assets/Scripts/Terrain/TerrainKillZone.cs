@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TerrainKillZone : MonoBehaviour
 {
-    private void OnTriggerStay2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.transform.CompareTag("Player"))
         {

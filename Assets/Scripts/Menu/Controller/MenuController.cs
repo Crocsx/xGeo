@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class MenuController : MonoBehaviour
 {
     public Button startButton;
-
     public List<PlayerPanel> playerPanel = new List<PlayerPanel>();
 
+
+
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        CleanPlayerManager();
+
         InputManager.instance.OnNewController += AddPlayerPannel;
 
         for (int i = 0; i< InputManager.instance.assignedController.Count; i++)
@@ -20,20 +24,21 @@ public class MenuController : MonoBehaviour
         startButton.Select();
     }
 	
-    void AddPlayerPannel(int id)
+    void CleanPlayerManager()
+    {
+        PlayersManager.instance.RemoveAllPlayers();
+    }
+
+    void AddPlayerPannel(int controllerID)
     {
         for (int i = 0; i < playerPanel.Count; i++)
         {
             if (!playerPanel[i].isInUse)
             {
-                playerPanel[i].Activate();
+                playerPanel[i].Activate(PlayersManager.instance.AddPlayer(controllerID));
                 break;
             }
         }
-    }
-	// Update is called once per frame
-	void Update ()
-    {
     }
 }
 

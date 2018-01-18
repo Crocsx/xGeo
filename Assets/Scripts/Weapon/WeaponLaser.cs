@@ -32,7 +32,7 @@ public class WeaponLaser : Usable
         {
             Debug.DrawRay(shootPosition, transform.right * 10000, Color.red);
             RaycastHit2D hit = Physics2D.Raycast(shootPosition, transform.right, 1 << LayerMask.NameToLayer("Player"));
-            if (hit.collider != null)
+            if (hit.collider != null && (hit.collider.gameObject != launcher.gameObject))
             {
                 hit.transform.GetComponent<Player>().Damage((transform.right - hit.transform.position).normalized, SHOOT_POWER);
             }

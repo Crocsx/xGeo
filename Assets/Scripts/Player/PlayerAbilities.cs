@@ -11,7 +11,7 @@ public class PlayerAbilities : MonoBehaviour {
     Usable usableItem;
 
     [Header("Dash")]
-    public const float MAX_BOOST_SPEED = 250;
+    public const float MAX_BOOST_SPEED = 400;
     public const float MAX_BOOST_COOLDOWN = 3;
     public const float BOOST_COOLDOWN_TIME = 1f;
     public const float BOOST_COOLDOWN_RATE = 10f;
@@ -23,7 +23,7 @@ public class PlayerAbilities : MonoBehaviour {
     public const float SHOCKWAVE_DURATION = 0.5f;
     public const float SHOCKWAVE_MAX_STRENGHT = 200;
     public const float SHOCKWAVE_MIN_RADIUS = 0.0f;
-    public const float SHOCKWAVE_MAX_RADIUS = 3f;
+    public const float SHOCKWAVE_MAX_RADIUS = 6f;
     public GameObject SHOCKWAVE_ANIMATION;
     float shockWaveCurrentCooldown = 0;
 

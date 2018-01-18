@@ -57,7 +57,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 1
 --- !u!114 &114977929187955634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MISSILE_POWER: 90
   MISSILE_LIFE_SPAWN: 5
-  MISSILE_SPEED: 0.2
+  MISSILE_SPEED: 2
   launcher: {fileID: 0}
 --- !u!198 &198404468428537284
 ParticleSystem:
@@ -285,7 +285,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 6
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2

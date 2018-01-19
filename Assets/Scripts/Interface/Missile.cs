@@ -7,6 +7,7 @@ public class Missile : MonoBehaviour {
     public int MISSILE_POWER = 90;
     public float MISSILE_LIFE_SPAWN = 5;
     public float MISSILE_SPEED = 0.2f;
+    public GameObject DESTRUCTION_EFFECT;
 
     float missileCurrentLife;
 
@@ -29,7 +30,12 @@ public class Missile : MonoBehaviour {
         if (collider.transform.CompareTag("Player") && (collider.gameObject != launcher.gameObject))
         {
             collider.transform.GetComponent<Player>().Damage((collider.transform.position - transform.position).normalized, MISSILE_POWER);
-            Destroy(gameObject);
+            Unspawn();
+        }
+
+        if (collider.gameObject.layer == LayerMask.NameToLayer("DeadZone"))
+        {
+            Unspawn();
         }
     }
 
@@ -46,17 +52,10 @@ public class Missile : MonoBehaviour {
         transform.position += transform.right * MISSILE_SPEED * TimeManager.instance.time;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log(collision.gameObject.layer);
-        if(collision.gameObject.layer == LayerMask.NameToLayer("DeadZone"))
-        {
-            Unspawn();
-        }
-    }
 
     void Unspawn()
     {
+        Instantiate(DESTRUCTION_EFFECT, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

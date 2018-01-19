@@ -40,7 +40,7 @@ public class WeaponLaser : Usable
             RaycastHit2D hit = Physics2D.Raycast(fireTurret.position, fireTurret.right, LayerHitable);
             if (hit.collider != null  && (hit.collider.CompareTag("Player")))
             {
-                hit.transform.GetComponent<Player>().Damage((fireTurret.right - hit.transform.position).normalized, SHOOT_POWER);
+                hit.transform.GetComponent<Player>().Damage((hit.transform.position - fireTurret.right).normalized, SHOOT_POWER);
             }
 
             Vector3[] laserPoints = new Vector3[] { fireTurret.position, hit.point };
@@ -59,8 +59,6 @@ public class WeaponLaser : Usable
         float duration = 0.5f;
         _lineRenderer.SetPositions(laserPoints);
         _lineRenderer.enabled = true;
-        Debug.Log(laserPoints[0]);
-        Debug.Log(laserPoints[1]);
         while (duration > 0)
         {
             duration -= TimeManager.instance.time;

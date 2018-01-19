@@ -10,12 +10,16 @@ public class WeaponLaser : Usable
 
     int currentShoot;
     float currentCooldown;
+    LineRenderer _lineRenderer;
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
         currentShoot = SHOOT_MAX_NUMBER;
+        _lineRenderer = transform.GetComponent<LineRenderer>();
+        _lineRenderer.startColor = launcher._pManager.playerColor;
+        _lineRenderer.endColor = launcher._pManager.playerColor;
     }
 
     // Update is called once per frame
@@ -25,24 +29,47 @@ public class WeaponLaser : Usable
         FireCooldown();
     }
 
-    public override void Use(Vector3 shootPosition)
+    public override void Use(Transform fireTurret)
     {
-        base.Use(shootPosition);
+        base.Use(fireTurret);
+
         if (currentCooldown <= 0)
         {
-            Debug.DrawRay(shootPosition, transform.right * 10000, Color.red);
-            RaycastHit2D hit = Physics2D.Raycast(shootPosition, transform.right, 1 << LayerMask.NameToLayer("Player"));
-            if (hit.collider != null && (hit.collider.gameObject != launcher.gameObject))
+            LayerMask LayerHitable = (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Terrain"));
+
+            RaycastHit2D hit = Physics2D.Raycast(fireTurret.position, fireTurret.right, LayerHitable);
+            if (hit.collider != null  && (hit.collider.CompareTag("Player")))
             {
-                hit.transform.GetComponent<Player>().Damage((transform.right - hit.transform.position).normalized, SHOOT_POWER);
+                hit.transform.GetComponent<Player>().Damage((fireTurret.right - hit.transform.position).normalized, SHOOT_POWER);
             }
+
+            Vector3[] laserPoints = new Vector3[] { fireTurret.position, hit.point };
+            StartCoroutine(Laser(laserPoints));
+
             currentCooldown = SHOOT_MAX_COOLDOWN;
             currentShoot--;
 
             if (currentShoot <= 0)
-                Used();
+                base.Used();
         }
     }
+
+    IEnumerator Laser(Vector3[] laserPoints)
+    {
+        float duration = 0.5f;
+        _lineRenderer.SetPositions(laserPoints);
+        _lineRenderer.enabled = true;
+        Debug.Log(laserPoints[0]);
+        Debug.Log(laserPoints[1]);
+        while (duration > 0)
+        {
+            duration -= TimeManager.instance.time;
+            yield return null;
+        }
+
+        _lineRenderer.enabled = false;
+    }
+
 
     void FireCooldown()
     {

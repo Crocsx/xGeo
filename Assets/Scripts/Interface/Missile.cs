@@ -35,8 +35,8 @@ public class Missile : MonoBehaviour {
 
     void CheckLife()
     {
-        if(missileCurrentLife <= 0)
-            Destroy(gameObject);
+        if (missileCurrentLife <= 0)
+            Unspawn();
 
         missileCurrentLife -= TimeManager.instance.time;
     }
@@ -44,5 +44,19 @@ public class Missile : MonoBehaviour {
     void Movement()
     {
         transform.position += transform.right * MISSILE_SPEED * TimeManager.instance.time;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.layer);
+        if(collision.gameObject.layer == LayerMask.NameToLayer("DeadZone"))
+        {
+            Unspawn();
+        }
+    }
+
+    void Unspawn()
+    {
+        Destroy(gameObject);
     }
 }

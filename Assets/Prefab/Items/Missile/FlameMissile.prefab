@@ -52,7 +52,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MISSILE_POWER: 90
   MISSILE_LIFE_SPAWN: 5
-  MISSILE_SPEED: 30
+  MISSILE_SPEED: 50
   launcher: {fileID: 0}
 --- !u!198 &198404468428537284
 ParticleSystem:

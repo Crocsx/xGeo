@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class WeaponFlameMissile : Usable
 {
-    float SHOOT_MAX_COOLDOWN = 1.0f;
-    int SHOOT_MAX_NUMBER = 5;
-
+    public float SHOOT_MAX_COOLDOWN = 1.0f;
+    public int SHOOT_MAX_NUMBER = 5;
     public GameObject flameMissile;
+
     int currentShoot;
     float currentCooldown;
 
@@ -25,19 +25,19 @@ public class WeaponFlameMissile : Usable
         FireCooldown();
     }
 
-    public override void Use(Vector3 shootPosition)
+    public override void Use(Transform fireTurret)
     {
-        base.Use(shootPosition);
+        base.Use(fireTurret);
         if (currentCooldown <= 0)
         {
-            GameObject missile = Instantiate(flameMissile, transform.position, launcher.transform.rotation);
+            GameObject missile = Instantiate(flameMissile, fireTurret.position, fireTurret.rotation);
             missile.GetComponent<Missile>().launcher = launcher;
 
             currentCooldown = SHOOT_MAX_COOLDOWN;
             currentShoot--;
 
             if (currentShoot <= 0)
-                Used();
+                base.Used();
         }
     }
 

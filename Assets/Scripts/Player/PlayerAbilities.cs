@@ -7,7 +7,7 @@ public class PlayerAbilities : MonoBehaviour
     Player _player;
 
     [Header("Fire")]
-    Transform firePoint;
+    public Transform fireTurret;
     Usable usableItem;
 
     [Header("Dash")]
@@ -29,7 +29,6 @@ public class PlayerAbilities : MonoBehaviour
 
     void Start()
     {
-        firePoint = transform.GetChild(0);
         _player = transform.GetComponent<Player>();
         _player.OnResetPlayer += ResetAbilities;
     }
@@ -58,7 +57,7 @@ public class PlayerAbilities : MonoBehaviour
     public void UseItem()
     {
         if (usableItem != null)
-            usableItem.Use(firePoint.position);
+            usableItem.Use(fireTurret);
     }
     #endregion
 

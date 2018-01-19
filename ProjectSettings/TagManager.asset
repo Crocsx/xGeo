@@ -17,7 +17,7 @@ TagManager:
   - GameElement
   - Terrain
   - Player
-  - 
+  - DeadZone
   - 
   - 
   - 
@@ -39,6 +39,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2821918051
+    locked: 0
+  - name: Arena
+    uniqueID: 670943167
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GameElement
+    uniqueID: 301347677
+    locked: 0
+  - name: Player
+    uniqueID: 216663233
+    locked: 0
+  - name: UI
+    uniqueID: 87322855
     locked: 0

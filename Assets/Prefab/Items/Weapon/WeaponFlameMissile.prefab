@@ -52,5 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launcher: {fileID: 0}
+  SHOOT_MAX_COOLDOWN: 0.5
+  SHOOT_MAX_NUMBER: 5
   flameMissile: {fileID: 1206919574526100, guid: b1f633a96fdb9c046a91481a570bb0fb,
     type: 2}

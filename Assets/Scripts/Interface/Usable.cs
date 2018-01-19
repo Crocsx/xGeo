@@ -18,7 +18,7 @@ public class Usable : MonoBehaviour
     {
     }
 
-    public virtual void Use(Vector3 pos)
+    public virtual void Use(Transform fireTurret)
     {
     }
 
@@ -26,5 +26,7 @@ public class Usable : MonoBehaviour
     {
         if (OnUsed != null)
             OnUsed();
+
+        Destroy(gameObject);
     }
 }

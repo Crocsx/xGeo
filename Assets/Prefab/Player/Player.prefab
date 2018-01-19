@@ -150,8 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9badea02ce421574f8a1272ee989420d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 1
-  explosion: {fileID: 1916332766378372, guid: b405aeb52f720c8449021b0db7100050, type: 2}
+  _pRigidbody: {fileID: 0}
+  _pManager: {fileID: 0}
+  _pRenderer: {fileID: 212200629034269420}
 --- !u!114 &114513468487195774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,6 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea26cb091fa25d4cb673166a900e546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MAX_MOVE_SPEED: 125
+  MAX_ROTATION_SPEED: 80
 --- !u!114 &114705574462604562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3036f3af29e19449b8f5bf77aad6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireTurret: {fileID: 4567731046244692}
   SHOCKWAVE_ANIMATION: {fileID: 1150954014454650, guid: f53d3361477560d44834f3c4657fd9a0,
     type: 2}
 --- !u!212 &212200629034269420
@@ -218,8 +222,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 216663233
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5b9ee0aa073af24488e7ec2a96c096ca, type: 3}
   m_Color: {r: 0.36551726, g: 1, b: 0, a: 1}

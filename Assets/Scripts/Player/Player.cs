@@ -15,11 +15,13 @@ public class Player : MonoBehaviour {
     PlayerAbilities _pAbilities;
     PlayerMovement _pMovement;
     PlayerDamage _pDamage;
-    SpriteRenderer _pRenderer;
-    PlayerManager _pManager;
     CircleCollider2D _pCollider;
     [HideInInspector]
     public Rigidbody2D _pRigidbody;
+    [HideInInspector]
+    public PlayerManager _pManager;
+    [SerializeField]
+    public SpriteRenderer _pRenderer;
 
     void Start () {
         _pAbilities = transform.GetComponent<PlayerAbilities>();
@@ -27,7 +29,6 @@ public class Player : MonoBehaviour {
         _pDamage = transform.GetComponent<PlayerDamage>();
         _pRigidbody = transform.GetComponent<Rigidbody2D>();
         _pCollider = transform.GetComponent<CircleCollider2D>();
-        _pRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 	
     public void Setup(PlayerManager pManager)
@@ -76,8 +77,6 @@ public class Player : MonoBehaviour {
 
     public void ChangeColor(Color color)
     {
-        if(_pRenderer == null)
-                _pRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
         _pRenderer.color = color;
     }
 

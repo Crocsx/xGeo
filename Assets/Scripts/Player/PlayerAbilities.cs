@@ -42,6 +42,9 @@ public class PlayerAbilities : MonoBehaviour
     #region Item
     public void GetItem(GameObject droppedItem)
     {
+        if (usableItem)
+            usableItem.Used();
+
         GameObject Item = Instantiate(droppedItem, transform.position, Quaternion.identity);
         Item.transform.parent = transform;
         usableItem = Item.GetComponent<Usable>();

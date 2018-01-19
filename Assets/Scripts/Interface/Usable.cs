@@ -22,7 +22,7 @@ public class Usable : MonoBehaviour
     {
     }
 
-    protected virtual void Used()
+    public  virtual void Used()
     {
         if (OnUsed != null)
             OnUsed();

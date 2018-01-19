@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
     {
         if (!isLocked)
             Input();
-	}
+    }
 
     public void Die()
     {

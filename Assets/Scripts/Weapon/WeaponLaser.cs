@@ -18,8 +18,8 @@ public class WeaponLaser : Usable
         base.Start();
         currentShoot = SHOOT_MAX_NUMBER;
         _lineRenderer = transform.GetComponent<LineRenderer>();
-        _lineRenderer.startColor = launcher._pManager.playerColor;
-        _lineRenderer.endColor = launcher._pManager.playerColor;
+        _lineRenderer.startColor = launcher.pManager.playerColor;
+        _lineRenderer.endColor = launcher.pManager.playerColor;
     }
 
     // Update is called once per frame

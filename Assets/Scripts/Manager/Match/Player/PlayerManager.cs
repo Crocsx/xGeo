@@ -24,7 +24,8 @@ public class PlayerManager : MonoBehaviour
     public Color playerColor;
     public GameObject playerPrefab;
 
-    Player player;
+    Player _player;
+    public Player player {get{return _player;}}
 
     void Awake()
     {
@@ -34,9 +35,9 @@ public class PlayerManager : MonoBehaviour
     public void MatchStart()
     {
         currentLife = MAX_LIFE;
-
+        MenuIGManager.instance.RequestPanel(this);
         Vector3 pos = MatchManager.instance.GetSpawnLocation(playerID);
-        player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<Player>();
+        _player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<Player>();
         player.Setup(this);
 
         Respawn();
@@ -49,6 +50,7 @@ public class PlayerManager : MonoBehaviour
         player.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 180);
 
         player.Unlock();
+        player.ResetPlayer();
 
         if (OnPlayerRespawned!= null)
             OnPlayerRespawned(player);

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour {
 
-    float multiplicator = 0;
+    float _multiplicator = 0;
+    public float multiplicator { get { return _multiplicator; } }
     Player _player;
 
     void Start()
@@ -16,12 +17,12 @@ public class PlayerDamage : MonoBehaviour {
     // Update is called once per frame
     public void GetDamage(Vector2 dir, float power)
     {
-        multiplicator += power / 10;
-        _player._pRigidbody.AddForce(dir * power * multiplicator);
+        _multiplicator += power / 10;
+        _player.pRigidbody.AddForce(dir * power * multiplicator);
     }
 
     void ResetDamage()
     {
-
+        _multiplicator = 0;
     }
 }

@@ -15,8 +15,10 @@ public class PlayerAbilities : MonoBehaviour
     public const float MAX_BOOST_COOLDOWN = 3;
     public const float BOOST_COOLDOWN_TIME = 1f;
     public const float BOOST_COOLDOWN_RATE = 10f;
-    float boostAvailable = MAX_BOOST_SPEED;
-    float boostCurrentCooldown = 0;
+    float _boostAvailable = 0;
+    public float boostAvailable { get { return _boostAvailable; } }
+    float _boostCurrentCooldown = 0;
+    public float boostCurrentCooldown { get { return _boostCurrentCooldown; } }
 
     [Header("ShockWave")]
     public const float SHOCKWAVE_COOLDOWN = 3f;
@@ -25,7 +27,9 @@ public class PlayerAbilities : MonoBehaviour
     public const float SHOCKWAVE_MIN_RADIUS = 0.0f;
     public const float SHOCKWAVE_MAX_RADIUS = 6f;
     public GameObject SHOCKWAVE_ANIMATION;
-    float shockWaveCurrentCooldown = 0;
+
+    float _shockWaveCurrentCooldown = 0;
+    public float shockWaveCurrentCooldown { get { return _shockWaveCurrentCooldown; } }
 
     void Start()
     {
@@ -70,9 +74,9 @@ public class PlayerAbilities : MonoBehaviour
         if (boostAvailable > 0)
         {
             float consumption = Mathf.Lerp(0, boostAvailable, intensity);
-            boostAvailable -= consumption;
-            _player._pRigidbody.AddForce(movement * consumption * 10);
-            boostCurrentCooldown = MAX_BOOST_COOLDOWN;
+            _boostAvailable -= consumption;
+            _player.pRigidbody.AddForce(movement * consumption * 10);
+            _boostCurrentCooldown = MAX_BOOST_COOLDOWN;
         }
     }
 
@@ -81,10 +85,10 @@ public class PlayerAbilities : MonoBehaviour
         if (boostAvailable == MAX_BOOST_SPEED)
             return;
 
-        boostCurrentCooldown -= TimeManager.instance.time;
+        _boostCurrentCooldown -= TimeManager.instance.time;
         if (boostCurrentCooldown < 0)
         {
-            boostAvailable += BOOST_COOLDOWN_RATE;
+            _boostAvailable += BOOST_COOLDOWN_RATE;
         }
     }
     #endregion
@@ -94,7 +98,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         if (shockWaveCurrentCooldown <= 0)
         {
-            shockWaveCurrentCooldown = SHOCKWAVE_COOLDOWN;
+            _shockWaveCurrentCooldown = SHOCKWAVE_COOLDOWN;
             Instantiate(SHOCKWAVE_ANIMATION, transform.position, Quaternion.identity).transform.parent = transform;
             StartCoroutine(ShockWaveEffect());
         }
@@ -126,17 +130,16 @@ public class PlayerAbilities : MonoBehaviour
 
     void ShockWaveCooldown()
     {
-        shockWaveCurrentCooldown -= TimeManager.instance.time;
+        _shockWaveCurrentCooldown -= TimeManager.instance.time;
     }
     #endregion
 
     #region Reset
     void ResetAbilities()
     {
-        boostAvailable = MAX_BOOST_SPEED;
-        boostCurrentCooldown = 0;
-
-        shockWaveCurrentCooldown = 0;
+        _boostAvailable = MAX_BOOST_SPEED;
+        _boostCurrentCooldown = 0;
+        _shockWaveCurrentCooldown = 0;
         usableItem = null;
     }
     #endregion

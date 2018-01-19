@@ -13,15 +13,21 @@ public class Player : MonoBehaviour {
 
     // Components
     PlayerAbilities _pAbilities;
+    public PlayerAbilities pAbilities { get { return _pAbilities; } }
     PlayerMovement _pMovement;
+    public PlayerMovement pMovement { get { return _pMovement; } }
     PlayerDamage _pDamage;
+    public PlayerDamage pDamage { get { return _pDamage; } }
+    Rigidbody2D _pRigidbody;
+    public Rigidbody2D pRigidbody { get { return _pRigidbody; } }
+    PlayerManager _pManager;
+    public PlayerManager pManager { get { return _pManager; } }
     CircleCollider2D _pCollider;
-    [HideInInspector]
-    public Rigidbody2D _pRigidbody;
-    [HideInInspector]
-    public PlayerManager _pManager;
+    public CircleCollider2D pCollider { get { return _pCollider; } }
+
+    // Public cause on child and can't get it on instantiation
     [SerializeField]
-    public SpriteRenderer _pRenderer;
+    public SpriteRenderer pRenderer;
 
     void Start () {
         _pAbilities = transform.GetComponent<PlayerAbilities>();
@@ -77,7 +83,7 @@ public class Player : MonoBehaviour {
 
     public void ChangeColor(Color color)
     {
-        _pRenderer.color = color;
+        pRenderer.color = color;
     }
 
     public void ResetPlayer()

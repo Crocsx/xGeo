@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     #region Movements
     public void Movement(Vector2 movement)
     {
-        _player._pRigidbody.AddForce(movement * MAX_MOVE_SPEED);
+        _player.pRigidbody.AddForce(movement * MAX_MOVE_SPEED);
     }
 
     public void Rotation(Vector2 rotation)

@@ -369,6 +369,10 @@ Prefab:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1287418758904194, guid: 6465f52be7127a741850f4c80a5e177c, type: 2}
+      propertyPath: m_Name
+      value: Panel Player 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6465f52be7127a741850f4c80a5e177c, type: 2}
   m_IsPrefabParent: 0

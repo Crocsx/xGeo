@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 199140480321151670}
   - component: {fileID: 58829566103026274}
   - component: {fileID: 114977929187955634}
+  - component: {fileID: 50090957790006862}
   m_Layer: 0
   m_Name: FlameMissile
   m_TagString: Untagged
@@ -43,6 +44,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50090957790006862
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1206919574526100}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58829566103026274
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -72,6 +93,8 @@ MonoBehaviour:
   MISSILE_POWER: 90
   MISSILE_LIFE_SPAWN: 5
   MISSILE_SPEED: 50
+  DESTRUCTION_EFFECT: {fileID: 1023196324455768, guid: ebcd0d1c7d02c4f4cbbffb0c18e3dfe6,
+    type: 2}
   launcher: {fileID: 0}
 --- !u!198 &198404468428537284
 ParticleSystem:

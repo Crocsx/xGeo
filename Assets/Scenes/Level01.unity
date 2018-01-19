@@ -880,6 +880,7 @@ MonoBehaviour:
   - {fileID: 270741991}
   - {fileID: 1560877131}
   - {fileID: 1301703077}
+  arenaCenter: {fileID: 509341867}
 --- !u!1 &1301703077
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ public class MatchManager : MonoBehaviour
     [Header("Spawn")]
     public GameObject[] spawnPosition;
 
+    [Header("Arena")]
+    public Transform arenaCenter;
+
     public static MatchManager instance;
 
     void Awake()

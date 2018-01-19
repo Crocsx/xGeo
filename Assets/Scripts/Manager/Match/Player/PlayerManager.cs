@@ -46,6 +46,8 @@ public class PlayerManager : MonoBehaviour
     {
         Vector3 pos = MatchManager.instance.GetSpawnLocation(playerID);
         player.transform.position = pos;
+        Vector3 dir = (player.transform.position - MatchManager.instance.arenaCenter.position).normalized;
+        transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg, Vector3.forward);
         player.Unlock();
 
         if (OnPlayerRespawned!= null)

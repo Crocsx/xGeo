@@ -6,7 +6,7 @@ public class WeaponLaser : Usable
 {
     float SHOOT_MAX_COOLDOWN = 1.0f;
     int SHOOT_MAX_NUMBER = 5;
-    int SHOOT_POWER = 90;
+    int SHOOT_POWER = 200;
 
     int currentShoot;
     float currentCooldown;
@@ -56,7 +56,7 @@ public class WeaponLaser : Usable
 
     IEnumerator Laser(Vector3[] laserPoints)
     {
-        float duration = 0.5f;
+        float duration = 0.1f;
         _lineRenderer.SetPositions(laserPoints);
         _lineRenderer.enabled = true;
         while (duration > 0)

@@ -12,7 +12,8 @@ public class PlayerMovement : MonoBehaviour {
     [Header("Rotation")]
     public float MAX_ROTATION_SPEED = 80;
 
-    void Start () {
+    void Start ()
+    {
         _player = transform.GetComponent<Player>();
         _player.OnResetPlayer += ResetMovement;
     }
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
     public void Rotation(Vector2 rotation)
     {
         float heading = Mathf.Atan2(rotation. x, rotation.y);
-        if (rotation.magnitude > InputManager.AXIS_DEAD_ZONE)
+        if (rotation.magnitude > InputManager.instance.AXIS_DEAD_ZONE)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, heading * Mathf.Rad2Deg), MAX_ROTATION_SPEED * TimeManager.instance.time);
     }
     #endregion
@@ -38,5 +39,10 @@ public class PlayerMovement : MonoBehaviour {
         MAX_ROTATION_SPEED = 80;
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        _player.OnResetPlayer -= ResetMovement;
+    }
 }
 

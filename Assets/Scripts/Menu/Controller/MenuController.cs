@@ -8,8 +8,6 @@ public class MenuController : MonoBehaviour
     public Button startButton;
     public List<PlayerPanel> playerPanel = new List<PlayerPanel>();
 
-
-
     // Use this for initialization
     void Start ()
     {
@@ -39,6 +37,11 @@ public class MenuController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.instance.OnNewController -= AddPlayerPannel;
     }
 }
 

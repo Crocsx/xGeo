@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public event onPauseGame OnPauseGame;
     public delegate void onResumeGame();
     public event onResumeGame OnResumeGame;
+    public delegate void onFinishGame();
+    public event onFinishGame OnFinishGame;
     public delegate void onEndGame();
     public event onEndGame OnEndGame;
     #endregion
@@ -81,6 +83,12 @@ public class GameManager : MonoBehaviour
             OnResumeGame();
     }
 
+    void d_FinishGame()
+    {
+        if (OnFinishGame != null)
+            OnFinishGame();
+    }
+
     void d_EndGame()
     {
         if (OnEndGame != null)
@@ -108,26 +116,37 @@ public class GameManager : MonoBehaviour
     #region Game State
     public void InitGame()
     {
+        setState(GameState.LOADING);
         d_InitGame();
     }
 
     public void StartGame()
     {
+        setState(GameState.PLAY);
         d_StartGame();
     }
 
     public void PauseGame()
     {
+        setState(GameState.PAUSE);
         d_PauseGame();
     }
 
     public void ResumeGame()
     {
+        setState(GameState.PLAY);
         d_ResumeGame();
+    }
+
+    public void FinishGame()
+    {
+        setState(GameState.MENU);
+        d_FinishGame();
     }
 
     public void EndGame()
     {
+        setState(GameState.MENU);
         d_EndGame();
     }
     #endregion
@@ -135,6 +154,7 @@ public class GameManager : MonoBehaviour
     #region Scene
     public void ReloadScene()
     {
+        setState(GameState.LOADING);
         string SceneName = SceneManager.GetActiveScene().name;
         if (OnReloadScene != null)
             OnReloadScene(SceneName);
@@ -143,6 +163,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string LevelName)
     {
+        setState(GameState.LOADING);
         SceneManager.LoadScene(LevelName);
         SceneManager.sceneLoaded += d_LoadedScene;
         d_LoadScene(LevelName);

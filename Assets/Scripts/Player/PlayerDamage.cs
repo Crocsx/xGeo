@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour {
 
-    float _multiplicator = 0;
     public float multiplicator { get { return _multiplicator; } }
+    float _multiplicator = 0;
     Player _player;
 
     void Start()
@@ -18,11 +18,16 @@ public class PlayerDamage : MonoBehaviour {
     public void GetDamage(Vector2 dir, float power)
     {
         _multiplicator += power / 10;
-        _player.pRigidbody.AddForce(dir * power * multiplicator);
+        _player.pRigidbody.AddForce(dir * power * _multiplicator);
     }
 
     void ResetDamage()
     {
         _multiplicator = 0;
+    }
+
+    private void OnDestroy()
+    {
+        _player.OnResetPlayer -= ResetDamage;
     }
 }

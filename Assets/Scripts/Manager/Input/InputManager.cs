@@ -11,8 +11,8 @@ public class InputManager : MonoBehaviour
     public event onNewController OnNewController;
 
     #region Variables
-    public const float AXIS_DEAD_ZONE = 0.25f;
-    public const float MAX_CONTROLLER = 2;
+    public float AXIS_DEAD_ZONE = 0.25f;
+    public float MAX_CONTROLLER = 2;
     public List<int> assignedController = new List<int>();
     #endregion
 
@@ -42,7 +42,7 @@ public class InputManager : MonoBehaviour
             if (assignedController.Contains(i))
                 continue;
 
-            if (InputManager.instance.GetButton("Joy" + i + "Start"))
+            if (GetButton("Joy" + i + "Start"))
             {
                 assignedController.Add(i);
                 if(OnNewController != null)

@@ -15,7 +15,8 @@ public class Missile : MonoBehaviour {
     public Player launcher;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         missileCurrentLife = MISSILE_LIFE_SPAWN;
     }
 
@@ -33,7 +34,7 @@ public class Missile : MonoBehaviour {
             Unspawn();
         }
 
-        if (collider.gameObject.layer == LayerMask.NameToLayer("DeadZone"))
+        if (collider.gameObject.layer == MatchManager.instance.LAYERMASK_DEADZONE)
         {
             Unspawn();
         }

@@ -13,8 +13,9 @@ public class PlayerManager : MonoBehaviour
     public float RESPAWN_TIME = 3;
 
     [Header("Life")]
-    public const int MAX_LIFE = 4;
-    int currentLife;
+    public int MAX_LIFE = 1;
+    public int lifeRemaining { get { return _lifeRemaining; } }
+    int _lifeRemaining = 0;
 
     [Header("Effects")]
     public GameObject explosion;
@@ -24,33 +25,53 @@ public class PlayerManager : MonoBehaviour
     public Color playerColor;
     public GameObject playerPrefab;
 
+    public Player player { get { return _player; } }
     Player _player;
-    public Player player {get{return _player;}}
+
 
     void Awake()
     {
-        GameManager.instance.OnStartGame += MatchStart;
+        GameManager.instance.OnInitGame += GameInit;
+        GameManager.instance.OnStartGame += GameStart;
+        GameManager.instance.OnFinishGame += GameFinished;
+        GameManager.instance.OnEndGame += GameEnd;
     }
 
-    public void MatchStart()
+    public void GameInit()
     {
-        currentLife = MAX_LIFE;
+        _lifeRemaining = MAX_LIFE;
         MenuIGManager.instance.RequestPanel(this);
         Vector3 pos = MatchManager.instance.GetSpawnLocation(playerID);
         _player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<Player>();
-        player.Setup(this);
+        _player.Setup(this);
+    }
 
+    void GameStart()
+    {
         Respawn();
+    }
+
+    public void GameFinished()
+    {
+        DisablePlayer();
+    }
+
+    public void GameEnd()
+    {
+        GameManager.instance.OnInitGame -= GameInit;
+        GameManager.instance.OnStartGame -= GameStart;
+        GameManager.instance.OnFinishGame -= GameFinished;
+        GameManager.instance.OnEndGame -= GameEnd;
     }
 
     void Respawn()
     {
-        player.transform.position = MatchManager.instance.GetSpawnLocation(playerID);
-        Vector3 dir = (player.transform.position - MatchManager.instance.arenaCenter.position).normalized;
-        player.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 180);
+        _player.transform.position = MatchManager.instance.GetSpawnLocation(playerID);
+        Vector3 dir = (_player.transform.position - MatchManager.instance.arenaCenter.position).normalized;
+        _player.transform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 180);
 
-        player.Unlock();
-        player.ResetPlayer();
+        _player.Unlock();
+        _player.ResetPlayer();
 
         if (OnPlayerRespawned!= null)
             OnPlayerRespawned(player);
@@ -62,15 +83,18 @@ public class PlayerManager : MonoBehaviour
             OnPlayerKilled(player);
 
         Instantiate(explosion, player.transform.position, Quaternion.identity);
-        player.Lock();
-        player.transform.position = new Vector3(2000, 2000, 2000);
+        DisablePlayer();
 
-        currentLife--;
+        LoseLife();
+    }
 
-        if (currentLife <= 0)
+    void LoseLife()
+    {
+        _lifeRemaining--;
+
+        if (_lifeRemaining <= 0)
         {
-            Debug.Log("Player " + playerID + " is anihilated");
-            return;
+            MatchManager.instance.PlayerAnihilated(this);
         }
         else
         {
@@ -93,5 +117,11 @@ public class PlayerManager : MonoBehaviour
     public void ChangeColor(Color color)
     {
         playerColor = color;
+    }
+
+    public void DisablePlayer()
+    {
+        _player.Lock();
+        _player.transform.position = new Vector3(2000, 2000, 2000);
     }
 }

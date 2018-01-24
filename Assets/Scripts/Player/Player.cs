@@ -29,7 +29,8 @@ public class Player : MonoBehaviour {
     [SerializeField]
     public SpriteRenderer pRenderer;
 
-    void Start () {
+    void Start ()
+    {
         _pAbilities = transform.GetComponent<PlayerAbilities>();
         _pMovement = transform.GetComponent<PlayerMovement>();
         _pDamage = transform.GetComponent<PlayerDamage>();

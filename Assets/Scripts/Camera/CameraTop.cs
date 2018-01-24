@@ -19,42 +19,73 @@ public class CameraTop : MonoBehaviour {
     public float MAX_DISTANCE_BORDER_OFFSET = 5;
 
     private Camera _camera;
+    private bool _active;
     #endregion
 
     #region Native Methods
     void Awake()
     {
-        _camera = transform.gameObject.GetComponent<Camera>();
-        for(var i = 0; i < PlayersManager.instance.players.Count; i++)
+        for (var i = 0; i < PlayersManager.instance.players.Count; i++)
         {
             PlayersManager.instance.players[i].OnPlayerRespawned += AddPlayer;
             PlayersManager.instance.players[i].OnPlayerKilled += RemovePlayer;
         }
+
+        GameManager.instance.OnStartGame += GameStart;
+        GameManager.instance.OnFinishGame += GameFinish;
+        GameManager.instance.OnEndGame += GameEnd;
+
     }
 
-    void Setup()
+    private void Start()
     {
+        _camera = transform.gameObject.GetComponent<Camera>();
+    }
 
+    void GameStart()
+    {
+        Activate();
+    }
+
+    void GameFinish()
+    {
+        Deactivate();
+    }
+
+    void GameEnd()
+    {
+        for (var i = 0; i < PlayersManager.instance.players.Count; i++)
+        {
+            PlayersManager.instance.players[i].OnPlayerRespawned -= AddPlayer;
+            PlayersManager.instance.players[i].OnPlayerKilled -= RemovePlayer;
+        }
+
+        GameManager.instance.OnStartGame -= GameStart;
+        GameManager.instance.OnFinishGame -= GameFinish;
+        GameManager.instance.OnEndGame -= GameEnd;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (players.Count <= 0)
+        if (players.Count <= 0 && !_active)
             return;
 
+        CameraMovement();
+    }
+    #endregion
+
+    void CameraMovement()
+    {
         Vector2 center = GetPlayersCentroid();
         float maxDistance = GetPlayersMaxDistance(center) + MAX_DISTANCE_BORDER_OFFSET;
 
-        // Debug.Log(maxDistance);
         Vector2 newPosition = Vector2.Lerp(transform.position, center, TimeManager.instance.time * cameraSpeed);
         transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
         _camera.orthographicSize = Mathf.Clamp(maxDistance, MINIMUM_ALTITUDE, MAXIMUM_ALTITUDE);
         //Mathf.Lerp(MINIMUM_ALTITUDE, MAXIMUM_ALTITUDE, maxDistance / (MINIMUM_ALTITUDE - MAXIMUM_ALTITUDE));
     }
-    #endregion
-
     #region Methods
     Vector2 GetPlayersCentroid()
     {
@@ -91,6 +122,16 @@ public class CameraTop : MonoBehaviour {
     {
         if (players.Contains(player))
             players.Remove(player);
+    }
+
+    public void Activate()
+    {
+        _active = true;
+    }
+
+    public void Deactivate()
+    {
+        _active = false;
     }
     #endregion
 }

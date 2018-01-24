@@ -40,10 +40,17 @@ public class PlayersManager : MonoBehaviour {
 
     public void RemoveAllPlayers()
     {
-        for(var i = 0; i<players.Count; i++)
+        for (var i = 0; i < players.Count; i++)
         {
             Destroy(players[i].gameObject);
         }
         players.Clear();
+    }
+
+    public int PlayersStillAlive()
+    {
+        int alive = 0;
+        for (int i = 0; i < players.Count; i++) if (players[i].lifeRemaining > 0) alive++;
+        return alive;
     }
 }

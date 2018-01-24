@@ -15,11 +15,10 @@ public class MenuManager : MonoBehaviour {
     [Header("Panels")]
     public PanelInfo[] panelInfoList;
 
-
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
 
-
-    void Start () {
+    void Start ()
+    {
 		for(int i=0; i < panelInfoList.Length; i++)
         {
             panels.Add(panelInfoList[i].name, panelInfoList[i].panel);

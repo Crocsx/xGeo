@@ -110,7 +110,7 @@ public class PlayerAbilities : MonoBehaviour
 
         while (timer < SHOCKWAVE_DURATION)
         {
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), Mathf.Lerp(SHOCKWAVE_MIN_RADIUS, SHOCKWAVE_MAX_RADIUS, timer / SHOCKWAVE_DURATION), 1 << LayerMask.NameToLayer("Player"));
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), Mathf.Lerp(SHOCKWAVE_MIN_RADIUS, SHOCKWAVE_MAX_RADIUS, timer / SHOCKWAVE_DURATION), MatchManager.instance.LAYERMASK_PLAYER);
 
             int i = 0;
             while (i < hitColliders.Length)
@@ -143,4 +143,8 @@ public class PlayerAbilities : MonoBehaviour
         usableItem = null;
     }
     #endregion
+    private void OnDestroy()
+    {
+        _player.OnResetPlayer -= ResetAbilities;
+    }
 }

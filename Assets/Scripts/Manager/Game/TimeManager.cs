@@ -29,6 +29,9 @@ public class TimeManager : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
 
+        GameManager.instance.OnPauseGame += OnPause;
+        GameManager.instance.OnResumeGame += OnResume;
+
         DontDestroyOnLoad(transform.gameObject);
     }
     #endregion
@@ -36,8 +39,6 @@ public class TimeManager : MonoBehaviour
     #region Native Methods
     void Start()
     {
-        GameManager.instance.OnPauseGame += OnPause;
-        GameManager.instance.OnResumeGame += OnResume;
         _time = 0;
         _modifier = 1;
     }
@@ -48,6 +49,11 @@ public class TimeManager : MonoBehaviour
     }
     #endregion
 
+    private void OnDestroy()
+    {
+        GameManager.instance.OnPauseGame -= OnPause;
+        GameManager.instance.OnResumeGame -= OnResume;
+    }
     #region Methods
 
     private void OnPause()

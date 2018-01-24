@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class MenuIGManager : MonoBehaviour {
 
+    public GameObject IGPlayerPanels;
     public PlayerIGPanel[] PlayerIGPanel;
+    public EndGameIGRecapPanel[] PlayerEndGamePanel;
+    public GameObject EndGamePanel;
     public static MenuIGManager instance;
 
     void Awake()
@@ -15,16 +18,30 @@ public class MenuIGManager : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
+        GameManager.instance.OnInitGame += GameInit;
+        GameManager.instance.OnFinishGame += FinishGame;
+        GameManager.instance.OnEndGame += EndGame;
     }
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void GameInit()
+    {
+        ActivateIGPlayerPanels();
+    }
+
+    public void FinishGame()
+    {
+        DeactivateIGPlayerPanels();
+        ActivateIGEndGame();
+        ShowStats();
+    }
+
+    public void EndGame()
+    {
+        GameManager.instance.OnInitGame -= GameInit;
+        GameManager.instance.OnFinishGame -= FinishGame;
+        GameManager.instance.OnEndGame -= EndGame;
+        instance = null;
+    }
 
     public void RequestPanel(PlayerManager pMgr)
     {
@@ -36,5 +53,32 @@ public class MenuIGManager : MonoBehaviour {
                 break;
             }
         }
+    }
+
+    void ShowStats()
+    {
+        for(var i = (MatchManager.instance.playersRanking.Count - 1); i >= 0; i--)
+        {
+            PlayerEndGamePanel[i].Activate(MatchManager.instance.playersRanking[i]);
+        }
+    }
+    void ActivateIGPlayerPanels()
+    {
+        IGPlayerPanels.SetActive(true);
+    }
+
+    void DeactivateIGPlayerPanels()
+    {
+        IGPlayerPanels.SetActive(false);
+    }
+
+    void ActivateIGEndGame()
+    {
+        EndGamePanel.SetActive(true);
+    }
+
+    void DeactivateIGEndGame()
+    {
+        EndGamePanel.SetActive(false);
     }
 }

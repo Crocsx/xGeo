@@ -14,8 +14,10 @@ public class PlayerIGPanel : MonoBehaviour {
 
     public bool inUse = false;
     PlayerManager pManager;
+
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
 		
 	}
 	

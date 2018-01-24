@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class WeaponLaser : Usable
 {
-    float SHOOT_MAX_COOLDOWN = 1.0f;
-    int SHOOT_MAX_NUMBER = 5;
-    int SHOOT_POWER = 200;
+    public float SHOOT_MAX_COOLDOWN = 1.0f;
+    public int SHOOT_MAX_NUMBER = 5;
+    public int SHOOT_POWER = 200;
 
     int currentShoot;
     float currentCooldown;
@@ -35,9 +35,9 @@ public class WeaponLaser : Usable
 
         if (currentCooldown <= 0)
         {
-            LayerMask LayerHitable = (1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("Terrain"));
+            LayerMask LayerHitable = (MatchManager.instance.LAYERMASK_PLAYER | 1 << MatchManager.instance.LAYERMASK_TERRAIN);
 
-            RaycastHit2D hit = Physics2D.Raycast(fireTurret.position, fireTurret.right, LayerHitable);
+            RaycastHit2D hit = Physics2D.Raycast(fireTurret.position, fireTurret.right, Mathf.Infinity, LayerHitable);
             if (hit.collider != null  && (hit.collider.CompareTag("Player")))
             {
                 hit.transform.GetComponent<Player>().Damage((hit.transform.position - fireTurret.right).normalized, SHOOT_POWER);

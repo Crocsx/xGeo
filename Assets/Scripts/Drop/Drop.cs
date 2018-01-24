@@ -16,7 +16,8 @@ public class Drop : MonoBehaviour
     GameObject itemType;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         selectedItem = GetRandomItem();
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = selectedItem.sprite;
     }

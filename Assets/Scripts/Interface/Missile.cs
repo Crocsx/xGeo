@@ -21,14 +21,18 @@ public class Missile : MonoBehaviour {
     }
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         CheckLife();
         Movement();
 	}
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.transform.CompareTag("Player") && (collider.gameObject != launcher.gameObject))
+        if (collider.gameObject == launcher.gameObject)
+            return;
+
+        if (collider.transform.CompareTag("Player"))
         {
             collider.transform.GetComponent<Player>().Damage((collider.transform.position - transform.position).normalized, MISSILE_POWER);
             Unspawn();

@@ -58,6 +58,7 @@ public class PlayerAbilities : MonoBehaviour
 
     public void ReleaseItem()
     {
+        usableItem.OnUsed -= ReleaseItem;
         usableItem = null;
     }
 

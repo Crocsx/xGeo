@@ -12,7 +12,6 @@ public class PlayersManager : MonoBehaviour {
     #region Singleton Initialization 
     void Awake()
     {
-
         if (instance == null)
             instance = this;
 

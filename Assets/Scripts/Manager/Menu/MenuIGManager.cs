@@ -8,6 +8,7 @@ public class MenuIGManager : MonoBehaviour {
     public PlayerIGPanel[] PlayerIGPanel;
     public EndGameIGRecapPanel[] PlayerEndGamePanel;
     public GameObject EndGamePanel;
+
     public static MenuIGManager instance;
 
     void Awake()
@@ -15,8 +16,10 @@ public class MenuIGManager : MonoBehaviour {
         if (instance == null)
             instance = this;
 
-        else if (instance != this)
+        else if (instance != this) {
             Destroy(gameObject);
+            return;
+        }
 
         GameManager.instance.OnInitGame += GameInit;
         GameManager.instance.OnFinishGame += FinishGame;

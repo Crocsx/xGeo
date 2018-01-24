@@ -37,7 +37,7 @@ public class CameraTop : MonoBehaviour {
 
     }
 
-    private void Start()
+    void Start()
     {
         _camera = transform.gameObject.GetComponent<Camera>();
     }
@@ -65,7 +65,6 @@ public class CameraTop : MonoBehaviour {
         GameManager.instance.OnEndGame -= GameEnd;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (players.Count <= 0 && !_active)

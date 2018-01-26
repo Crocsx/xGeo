@@ -38,7 +38,7 @@ public class Missile : MonoBehaviour {
             Unspawn();
         }
 
-        if (collider.gameObject.layer == MatchManager.instance.LAYERMASK_DEADZONE)
+        if ((1 << collider.gameObject.layer) == MatchManager.instance.LAYERMASK_DEADZONE.value)
         {
             Unspawn();
         }

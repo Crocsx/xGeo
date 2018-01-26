@@ -35,9 +35,10 @@ public class WeaponLaser : Usable
 
         if (currentCooldown <= 0)
         {
-            LayerMask LayerHitable = (MatchManager.instance.LAYERMASK_PLAYER | 1 << MatchManager.instance.LAYERMASK_TERRAIN);
+            LayerMask LayerHitable = (MatchManager.instance.LAYERMASK_PLAYER.value | MatchManager.instance.LAYERMASK_TERRAIN.value);
 
             RaycastHit2D hit = Physics2D.Raycast(fireTurret.position, fireTurret.right, Mathf.Infinity, LayerHitable);
+
             if (hit.collider != null  && (hit.collider.CompareTag("Player")))
             {
                 hit.transform.GetComponent<Player>().Damage((hit.transform.position - fireTurret.right).normalized, SHOOT_POWER);

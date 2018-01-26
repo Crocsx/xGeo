@@ -5,9 +5,10 @@ using UnityEngine;
 public class MenuIGManager : MonoBehaviour {
 
     public GameObject IGPlayerPanels;
+    public GameObject IGEndGamePanel;
+    public GameObject IGPausePanel;
     public PlayerIGPanel[] PlayerIGPanel;
     public EndGameIGRecapPanel[] PlayerEndGamePanel;
-    public GameObject EndGamePanel;
 
     public static MenuIGManager instance;
 
@@ -24,6 +25,8 @@ public class MenuIGManager : MonoBehaviour {
         GameManager.instance.OnInitGame += GameInit;
         GameManager.instance.OnFinishGame += FinishGame;
         GameManager.instance.OnEndGame += EndGame;
+        GameManager.instance.OnPauseGame += ActivateIGPause;
+        GameManager.instance.OnResumeGame += DeactivateIGPause;
     }
 
     public void GameInit()
@@ -40,6 +43,8 @@ public class MenuIGManager : MonoBehaviour {
 
     public void EndGame()
     {
+        GameManager.instance.OnPauseGame -= ActivateIGPause;
+        GameManager.instance.OnResumeGame -= DeactivateIGPause;
         GameManager.instance.OnInitGame -= GameInit;
         GameManager.instance.OnFinishGame -= FinishGame;
         GameManager.instance.OnEndGame -= EndGame;
@@ -77,11 +82,36 @@ public class MenuIGManager : MonoBehaviour {
 
     void ActivateIGEndGame()
     {
-        EndGamePanel.SetActive(true);
+        IGEndGamePanel.SetActive(true);
     }
 
     void DeactivateIGEndGame()
     {
-        EndGamePanel.SetActive(false);
+        IGEndGamePanel.SetActive(false);
+    }
+
+    void ActivateIGPause()
+    {
+        IGPausePanel.SetActive(true);
+    }
+
+    void DeactivateIGPause()
+    {
+        IGPausePanel.SetActive(false);
+    }
+
+    public void ResumeGame()
+    {
+        GameManager.instance.ResumeGame();
+    }
+
+    public void ReloadGame()
+    {
+        GameManager.instance.ReloadScene();
+    }
+
+    public void ReturnMenu()
+    {
+        GameManager.instance.LoadScene("Menu");
     }
 }

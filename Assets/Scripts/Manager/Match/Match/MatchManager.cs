@@ -36,6 +36,9 @@ public class MatchManager : MonoBehaviour
 
         else if (instance != this)
             Destroy(gameObject);
+
+        GameManager.instance.OnReloadScene += LoseReferences;
+        GameManager.instance.OnLoadScene += LoseReferences;
     }
 
     void Start()
@@ -74,8 +77,14 @@ public class MatchManager : MonoBehaviour
 
     public void EndGame()
     {
+        MenuIGManager.instance.ReturnMenu();
+    }
+
+    void LoseReferences(string name)
+    {
+        GameManager.instance.OnReloadScene -= LoseReferences;
+        GameManager.instance.OnLoadScene -= LoseReferences;
         GameManager.instance.EndGame();
         instance = null;
-        GameManager.instance.LoadScene("Menu");
     }
 }

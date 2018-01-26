@@ -24,11 +24,6 @@ public class MenuManager : MonoBehaviour {
             panels.Add(panelInfoList[i].name, panelInfoList[i].panel);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void GoTo(string panelName)
     {

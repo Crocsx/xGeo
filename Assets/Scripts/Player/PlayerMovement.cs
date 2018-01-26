@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour {
     #region Movements
     public void Movement(Vector2 movement)
     {
-        _player.pRigidbody.AddForce(movement * MAX_MOVE_SPEED);
+        _player.pRigidbody.AddForce(movement * MAX_MOVE_SPEED * TimeManager.instance.time * 100);
     }
 
     public void Rotation(Vector2 rotation)

@@ -29,14 +29,18 @@ public class Player : MonoBehaviour {
     [SerializeField]
     public SpriteRenderer pRenderer;
 
-    void Start ()
+    void Start()
     {
         _pAbilities = transform.GetComponent<PlayerAbilities>();
         _pMovement = transform.GetComponent<PlayerMovement>();
         _pDamage = transform.GetComponent<PlayerDamage>();
         _pRigidbody = transform.GetComponent<Rigidbody2D>();
         _pCollider = transform.GetComponent<CircleCollider2D>();
+
+        GameManager.instance.OnPauseGame += Lock;
+        GameManager.instance.OnResumeGame += Unlock;
     }
+    
 	
     public void Setup(PlayerManager pManager)
     {
@@ -74,7 +78,10 @@ public class Player : MonoBehaviour {
             _pAbilities.ShockWave();
 
         if (InputManager.instance.GetAxis("Joy" + _pManager.playerID + "TriggerRight") > 0)
-            _pAbilities.UseItem(); 
+            _pAbilities.UseItem();
+
+        if (InputManager.instance.GetButton("Joy" + _pManager.playerID + "Start"))
+            GameManager.instance.PauseGame();
     }
 
     public void Damage(Vector2 dir, float power)
@@ -111,5 +118,11 @@ public class Player : MonoBehaviour {
     public void Unlock()
     {
         locked = false;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.OnPauseGame -= Lock;
+        GameManager.instance.OnResumeGame -= Unlock;
     }
 }

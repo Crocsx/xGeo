@@ -76,10 +76,10 @@ public class CameraTop : MonoBehaviour {
 
     void CameraMovement()
     {
-        Vector2 center = GetPlayersCentroid();
-        float maxDistance = GetPlayersMaxDistance(center) + MAX_DISTANCE_BORDER_OFFSET;
+        Vector2 playersCentroid = GetPlayersCentroid();
+        float maxDistance = GetPlayersMaxDistance(playersCentroid) + MAX_DISTANCE_BORDER_OFFSET;
 
-        Vector2 newPosition = Vector2.Lerp(transform.position, center, TimeManager.instance.time * cameraSpeed);
+        Vector2 newPosition = Vector2.Lerp(transform.position, playersCentroid, TimeManager.instance.time * cameraSpeed);
         transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
         _camera.orthographicSize = Mathf.Clamp(maxDistance, MINIMUM_ALTITUDE, MAXIMUM_ALTITUDE);
@@ -94,7 +94,10 @@ public class CameraTop : MonoBehaviour {
             centroid.x += players[i].transform.position.x;
             centroid.y += players[i].transform.position.y;
         }
-        return centroid / players.Count;
+        if (players.Count > 0)
+            return centroid / players.Count;
+        else
+            return centroid;
     }
 
     float GetPlayersMaxDistance(Vector2 center)

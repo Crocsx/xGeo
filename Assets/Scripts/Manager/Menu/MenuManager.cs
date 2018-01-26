@@ -47,4 +47,9 @@ public class MenuManager : MonoBehaviour {
             panel.SetActive(false);
         }
     }
+
+    public void LoadScene(string sceneName)
+    {
+        GameManager.instance.LoadScene(sceneName);
+    }
 }

@@ -1100,7 +1100,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1519605185}
+      - m_Target: {fileID: 1746034369}
         m_MethodName: LoadScene
         m_Mode: 5
         m_Arguments:
@@ -1309,6 +1309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf2be9485410cc4f84c7c2780ab4432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AXIS_DEAD_ZONE: 0.25
+  MAX_CONTROLLER: 2
   assignedController: 
 --- !u!4 &1519605187
 Transform:

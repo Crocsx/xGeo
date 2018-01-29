@@ -7,6 +7,7 @@ public class Missile : MonoBehaviour {
     public int MISSILE_POWER = 90;
     public float MISSILE_LIFE_SPAWN = 5;
     public float MISSILE_SPEED = 0.2f;
+    public float FREEZE_TIME = 0f;
     public GameObject DESTRUCTION_EFFECT;
 
     float missileCurrentLife;
@@ -35,6 +36,10 @@ public class Missile : MonoBehaviour {
         if (collider.transform.CompareTag("Player"))
         {
             collider.transform.GetComponent<Player>().Damage((collider.transform.position - transform.position).normalized, MISSILE_POWER);
+            if(FREEZE_TIME > 0)
+            {
+                collider.transform.GetComponent<Player>().Freeze(FREEZE_TIME);
+            }
             Unspawn();
         }
 
@@ -60,7 +65,8 @@ public class Missile : MonoBehaviour {
 
     void Unspawn()
     {
-        Instantiate(DESTRUCTION_EFFECT, transform.position, Quaternion.identity);
+        if(DESTRUCTION_EFFECT != null)
+            Instantiate(DESTRUCTION_EFFECT, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

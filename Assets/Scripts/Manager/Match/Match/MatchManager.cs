@@ -21,7 +21,6 @@ public class MatchManager : MonoBehaviour
     public LayerMask LAYERMASK_GAMEELEMENT;
     public LayerMask LAYERMASK_DEFAULT;
 
-
     bool isGameFinish
     {
        get { return (PlayersManager.instance.PlayersStillAlive() <= 1); }

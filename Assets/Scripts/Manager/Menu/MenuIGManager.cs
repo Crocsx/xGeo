@@ -25,6 +25,7 @@ public class MenuIGManager : MonoBehaviour {
         GameManager.instance.OnInitGame += GameInit;
         GameManager.instance.OnFinishGame += FinishGame;
         GameManager.instance.OnEndGame += EndGame;
+        GameManager.instance.OnReloadScene += Reload;
         GameManager.instance.OnPauseGame += ActivateIGPause;
         GameManager.instance.OnResumeGame += DeactivateIGPause;
     }
@@ -39,6 +40,11 @@ public class MenuIGManager : MonoBehaviour {
         DeactivateIGPlayerPanels();
         ActivateIGEndGame();
         ShowStats();
+    }
+
+    void Reload(string scene)
+    {
+        EndGame();
     }
 
     public void EndGame()

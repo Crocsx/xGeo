@@ -2,31 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponLaser : Usable
+public class WeaponLaser : Weapon
 {
-    public float SHOOT_MAX_COOLDOWN = 1.0f;
-    public int SHOOT_MAX_NUMBER = 5;
     public int SHOOT_POWER = 200;
 
-    int currentShoot;
-    float currentCooldown;
     LineRenderer _lineRenderer;
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
-        currentShoot = SHOOT_MAX_NUMBER;
         _lineRenderer = transform.GetComponent<LineRenderer>();
         _lineRenderer.startColor = launcher.pManager.playerColor;
         _lineRenderer.endColor = launcher.pManager.playerColor;
-    }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-        FireCooldown();
     }
 
     public override void Use(Transform fireTurret)
@@ -47,7 +35,7 @@ public class WeaponLaser : Usable
             Vector3[] laserPoints = new Vector3[] { fireTurret.position, hit.point };
             StartCoroutine(Laser(laserPoints));
 
-            currentCooldown = SHOOT_MAX_COOLDOWN;
+            currentCooldown = SHOOT_COOLDOWN;
             currentShoot--;
 
             if (currentShoot <= 0)
@@ -67,12 +55,5 @@ public class WeaponLaser : Usable
         }
 
         _lineRenderer.enabled = false;
-    }
-
-
-    void FireCooldown()
-    {
-        if (currentCooldown > 0)
-            currentCooldown -= TimeManager.instance.time;
     }
 }

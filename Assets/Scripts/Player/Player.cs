@@ -8,8 +8,11 @@ public class Player : MonoBehaviour {
     public delegate void onResetPlayer();
     public event onResetPlayer OnResetPlayer;
 
-    bool locked;
-    public bool isLocked {get{return locked;}}
+    bool _locked;
+    public bool isLocked {get{return _locked;}}
+
+    bool _freezed;
+    public bool isFreezed { get { return _freezed; } }
 
     // Components
     PlayerAbilities _pAbilities;
@@ -50,9 +53,34 @@ public class Player : MonoBehaviour {
 
 	void Update ()
     {
-        if (!isLocked)
+        if (!isLocked && !isFreezed)
             Input();
     }
+
+    public void Freeze(float timer)
+    {
+        _freezed = true;
+        StartCoroutine(FreezeTime(timer));
+    }
+
+    public void UnFreeze()
+    {
+        _freezed = false;
+    }
+
+    IEnumerator FreezeTime(float timer)
+    {
+        float currTimer = 0;
+        while (currTimer < timer)
+        {
+            currTimer += TimeManager.instance.time;
+            yield return null;
+        }
+
+        UnFreeze();
+    }
+
+
 
     public void Die()
     {
@@ -112,12 +140,12 @@ public class Player : MonoBehaviour {
 
     public void Lock()
     {
-        locked = true;
+        _locked = true;
     }
 
     public void Unlock()
     {
-        locked = false;
+        _locked = false;
     }
 
     private void OnDestroy()

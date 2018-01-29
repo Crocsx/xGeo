@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199849830152285450}
   - component: {fileID: 114602427446876216}
   m_Layer: 0
-  m_Name: FireMissile
+  m_Name: FireMissileDestroy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,6 +8,7 @@ public class DropManager : MonoBehaviour {
     public GameObject DroppableArea;
 
     [Header("Drops Timers")]
+    public float MAX_DROPS_ON_MAP = 6;
     public float MAX_DROP_COOLDOWN_DELTA = 3;
     public float DROP_RATE_COOLDOWN = 5f;
     float dropCurrentCooldown = 0;

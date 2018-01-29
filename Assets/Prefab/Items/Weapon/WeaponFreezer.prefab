@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1644186820760788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 216.12305, y: -45.559437, z: 4.3222656}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,6 +54,6 @@ MonoBehaviour:
   launcher: {fileID: 0}
   SHOOT_COOLDOWN: 1
   SHOOT_MAX_NUMBER: 5
-  POWER: 200
   FREEZE_TIME: 2.5
-  FreezeMissile: {fileID: 0}
+  FreezeMissile: {fileID: 1453238309802512, guid: 7b5da4b09118c064d9a738d386822af7,
+    type: 2}

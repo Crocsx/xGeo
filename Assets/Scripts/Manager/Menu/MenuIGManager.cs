@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class MenuIGManager : MonoBehaviour {
 
     public GameObject IGPlayerPanels;
     public GameObject IGEndGamePanel;
+    public Button IGEndGamePanelDefaultButton;
     public GameObject IGPausePanel;
+    public Button IGPausePanelDefaultButton;
     public PlayerIGPanel[] PlayerIGPanel;
     public EndGameIGRecapPanel[] PlayerEndGamePanel;
 
@@ -89,6 +93,7 @@ public class MenuIGManager : MonoBehaviour {
     void ActivateIGEndGame()
     {
         IGEndGamePanel.SetActive(true);
+        IGEndGamePanelDefaultButton.Select();
     }
 
     void DeactivateIGEndGame()
@@ -99,6 +104,7 @@ public class MenuIGManager : MonoBehaviour {
     void ActivateIGPause()
     {
         IGPausePanel.SetActive(true);
+        IGPausePanelDefaultButton.Select();
     }
 
     void DeactivateIGPause()

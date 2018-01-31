@@ -31,6 +31,10 @@ public class Player : MonoBehaviour {
     // Public cause on child and can't get it on instantiation
     [SerializeField]
     public SpriteRenderer pRenderer;
+    [SerializeField]
+    public TrailRenderer pTrailRight;
+    [SerializeField]
+    public TrailRenderer pTrailLeft;
 
     void Start()
     {
@@ -119,6 +123,8 @@ public class Player : MonoBehaviour {
 
     public void ChangeColor(Color color)
     {
+        pTrailRight.startColor = pTrailRight.endColor = color;
+        pTrailLeft.startColor = pTrailLeft.endColor = color;
         pRenderer.color = color;
     }
 

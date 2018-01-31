@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4328669921354278}
-  - component: {fileID: 114016399735625760}
   - component: {fileID: 58545062849879686}
+  - component: {fileID: 114486293641430978}
   m_Layer: 8
   m_Name: Drop
   m_TagString: Drop
@@ -86,7 +86,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.5
---- !u!114 &114016399735625760
+--- !u!114 &114486293641430978
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

@@ -7,10 +7,11 @@ public class PlayerIGPanel : MonoBehaviour {
 
     public Text playerName;
     public Text playerMultiplicator;
+    public Image PlayerShip;
     public RectTransform playerDashCDContainer;
-    public RectTransform playerDashCD;
+    public Image playerDashCD;
     public RectTransform playerShockWaveCDContainer;
-    public RectTransform playerShockWaveCD;
+    public Image playerShockWaveCD;
 
     public bool inUse = false;
     PlayerManager pManager;
@@ -26,9 +27,10 @@ public class PlayerIGPanel : MonoBehaviour {
     {
         playerName.text = "Player" + pManager.playerID;
         playerName.color = pManager.playerColor;
+        PlayerShip.color = pManager.playerColor;
         playerMultiplicator.text = Mathf.Floor(pManager.player.pDamage.multiplicator).ToString();
-        playerDashCD.sizeDelta = new Vector2(Mathf.Lerp(0, playerDashCDContainer.sizeDelta.x, pManager.player.pAbilities.boostAvailable / PlayerAbilities.MAX_BOOST_SPEED), playerDashCDContainer.sizeDelta.y);
-        playerShockWaveCD.sizeDelta = new Vector2(Mathf.Lerp(playerShockWaveCDContainer.sizeDelta.x, 0, pManager.player.pAbilities.shockWaveCurrentCooldown / PlayerAbilities.SHOCKWAVE_COOLDOWN), playerDashCDContainer.sizeDelta.y);
+        playerDashCD.fillAmount = Mathf.Lerp(1, 0, pManager.player.pAbilities.boostAvailable / PlayerAbilities.MAX_BOOST_SPEED);
+        playerShockWaveCD.fillAmount = Mathf.Lerp(1, 0, pManager.player.pAbilities.shockWaveCurrentCooldown / PlayerAbilities.SHOCKWAVE_COOLDOWN);
     }
 
     public void Activate(PlayerManager pMgr)

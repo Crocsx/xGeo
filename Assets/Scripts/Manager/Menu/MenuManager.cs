@@ -43,6 +43,12 @@ public class MenuManager : MonoBehaviour {
         }
     }
 
+    public void StartMatch(string sceneName)
+    {
+        if(PlayersManager.instance.players.Count > 0)
+            GameManager.instance.LoadScene(sceneName);
+    }
+
     public void LoadScene(string sceneName)
     {
         GameManager.instance.LoadScene(sceneName);

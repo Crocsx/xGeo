@@ -8,6 +8,9 @@ public class PlayerDamage : MonoBehaviour {
     float _multiplicator = 0;
     Player _player;
 
+    [HideInInspector]
+    public PlayerManager lastHitter;
+
     void Start()
     {
         _player = transform.GetComponent<Player>();
@@ -15,8 +18,9 @@ public class PlayerDamage : MonoBehaviour {
     }
 
     // Update is called once per frame
-    public void GetDamage(Vector2 dir, float power)
+    public void GetDamage(Vector2 dir, float power, PlayerManager hitter)
     {
+        lastHitter = hitter;
         _multiplicator += power / 10;
         _player.pRigidbody.AddForce(dir * power * _multiplicator);
     }

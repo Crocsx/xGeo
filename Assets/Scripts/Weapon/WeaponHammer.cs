@@ -46,7 +46,7 @@ public class WeaponHammer : Weapon
             {
                 Vector2 dir = (hitColliders[i].transform.position - transform.position).normalized;
                 float power = Mathf.Lerp(HAMMER_MIN_POWER, HAMMER_MAX_POWER, currDuration / HAMMER_DURATION);
-                hitColliders[i].transform.GetComponent<Player>().Damage(dir, power);
+                DealDamage(hitColliders[i].transform.GetComponent<Player>(), dir, power);
             }
             i++;
         }

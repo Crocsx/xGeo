@@ -120,7 +120,7 @@ public class PlayerAbilities : MonoBehaviour
                 {
                     Vector2 dir = (hitColliders[i].transform.position - transform.position).normalized;
                     float power = (SHOCKWAVE_MAX_STRENGHT * (timer / SHOCKWAVE_DURATION));
-                    hitColliders[i].transform.GetComponent<Player>().Damage(dir, power);
+                    _player.DealDamage(hitColliders[i].transform.GetComponent<Player>(), dir, power);
                 }
                 i++;
             }

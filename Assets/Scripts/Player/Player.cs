@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, Damager, Damageable {
 
     // Events
     public delegate void onResetPlayer();
     public event onResetPlayer OnResetPlayer;
 
+    public string damagerName { get { return "Player"; } }
+
+    // State
     bool _locked;
     public bool isLocked {get{return _locked;}}
 
@@ -84,10 +87,12 @@ public class Player : MonoBehaviour {
         UnFreeze();
     }
 
-
-
     public void Die()
     {
+        if(_pDamage.lastHitter != null)
+        {
+            _pDamage.lastHitter.HasKilled(_pManager);
+        }
         _pManager.PlayerDie();
     }
 
@@ -116,9 +121,14 @@ public class Player : MonoBehaviour {
             GameManager.instance.PauseGame();
     }
 
-    public void Damage(Vector2 dir, float power)
+    public void GetDamage(Vector2 dir, float power, PlayerManager hitter)
     {
-        _pDamage.GetDamage(dir, power);
+        _pDamage.GetDamage(dir, power, hitter);
+    }
+
+    public void DealDamage(Player reciever, Vector2 dir, float power)
+    {
+        reciever.GetDamage(dir, power, _pManager);
     }
 
     public void ChangeColor(Color color)

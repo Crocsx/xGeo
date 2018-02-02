@@ -32,7 +32,6 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(InputManager.instance.GetAxis("Joy1TriggerRight"));
         CheckNewController();
     }
 

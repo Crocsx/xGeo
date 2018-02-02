@@ -12,8 +12,6 @@ public class MatchManager : MonoBehaviour
     [Header("Arena")]
     public Transform arenaCenter;
 
-    public List<PlayerManager> playersRanking = new List<PlayerManager>();
-
     [Header("Layers")]
     public LayerMask LAYERMASK_PLAYER;
     public LayerMask LAYERMASK_DEADZONE;
@@ -52,21 +50,24 @@ public class MatchManager : MonoBehaviour
 
     public void PlayerAnihilated(PlayerManager player)
     {
-        playersRanking.Sort((a, b) => a.lifeRemaining.CompareTo(b.lifeRemaining));
-
         if (isGameFinish)
             FinishGame();
     }
-
 
     void Update()
     {
         if (!gameStarted)
         {
             GameManager.instance.StartGame();
-            playersRanking = PlayersManager.instance.players;
             gameStarted = true;
         }
+    }
+
+    public List<PlayerManager> GetRanking()
+    {
+        List<PlayerManager> ranking = PlayersManager.instance.players;
+        ranking.Sort((a, b) => b.score.CompareTo(a.score));
+        return ranking;
     }
 
     void FinishGame()

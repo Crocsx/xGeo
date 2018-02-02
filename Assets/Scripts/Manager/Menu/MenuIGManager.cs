@@ -75,9 +75,10 @@ public class MenuIGManager : MonoBehaviour {
 
     void ShowStats()
     {
-        for(var i = (MatchManager.instance.playersRanking.Count - 1); i >= 0; i--)
+        List < PlayerManager > ranking = MatchManager.instance.GetRanking();
+        for (var i = (ranking.Count - 1); i >= 0; i--)
         {
-            PlayerEndGamePanel[i].Activate(MatchManager.instance.playersRanking[i]);
+            PlayerEndGamePanel[i].Activate(ranking[i]);
         }
     }
     void ActivateIGPlayerPanels()

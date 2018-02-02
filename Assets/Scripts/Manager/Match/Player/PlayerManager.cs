@@ -17,8 +17,21 @@ public class PlayerManager : MonoBehaviour
     public int lifeRemaining { get { return _lifeRemaining; } }
     int _lifeRemaining = 0;
 
+
+    [Header("Score")]
+    public int pointPerKill = 100;
+    public int pointPerDeath = -50;
+
+    [HideInInspector]
+    public int kill { get { return _kill; } }
+    int _kill = 0;
+
     [Header("Effects")]
     public GameObject explosion;
+
+    [HideInInspector]
+    public int score { get { return _score; } }
+    int _score = 0;
 
     [Header("Params")]
     public int playerID;
@@ -40,6 +53,7 @@ public class PlayerManager : MonoBehaviour
     public void GameInit()
     {
         _lifeRemaining = MAX_LIFE;
+        _kill = 0;
         MenuIGManager.instance.RequestPanel(this);
         Vector3 pos = MatchManager.instance.GetSpawnLocation(playerID);
         _player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<Player>();
@@ -88,10 +102,16 @@ public class PlayerManager : MonoBehaviour
         LoseLife();
     }
 
+    public void HasKilled(PlayerManager kill)
+    {
+        _score += pointPerKill;
+        _kill++;
+    }
+
     void LoseLife()
     {
         _lifeRemaining--;
-
+        _score += pointPerDeath;
         if (_lifeRemaining <= 0)
         {
             MatchManager.instance.PlayerAnihilated(this);

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Missile : MonoBehaviour {
+public class Missile : MonoBehaviour, Damager {
 
+    public string damagerName { get { return "Missile"; } }
     public int MISSILE_POWER = 90;
     public float MISSILE_LIFE_SPAWN = 5;
     public float MISSILE_SPEED = 0.2f;
@@ -35,7 +36,7 @@ public class Missile : MonoBehaviour {
 
         if (collider.transform.CompareTag("Player"))
         {
-            collider.transform.GetComponent<Player>().Damage((collider.transform.position - transform.position).normalized, MISSILE_POWER);
+            DealDamage(collider.transform.GetComponent<Player>(), (collider.transform.position - transform.position).normalized, MISSILE_POWER);
             if(FREEZE_TIME > 0)
             {
                 collider.transform.GetComponent<Player>().Freeze(FREEZE_TIME);
@@ -68,5 +69,10 @@ public class Missile : MonoBehaviour {
         if(DESTRUCTION_EFFECT != null)
             Instantiate(DESTRUCTION_EFFECT, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    public void DealDamage(Player reciever, Vector2 dir, float power)
+    {
+        reciever.GetDamage(dir, power, launcher.pManager);
     }
 }

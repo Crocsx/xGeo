@@ -29,7 +29,7 @@ public class PlayerIGPanel : MonoBehaviour {
         playerName.color = pManager.playerColor;
         PlayerShip.color = pManager.playerColor;
         playerMultiplicator.text = Mathf.Floor(pManager.player.pDamage.multiplicator).ToString();
-        playerDashCD.fillAmount = Mathf.Lerp(1, 0, pManager.player.pAbilities.boostAvailable / PlayerAbilities.MAX_BOOST_SPEED);
+        playerDashCD.fillAmount = Mathf.Lerp(0, 1, pManager.player.pAbilities.boostAvailable / PlayerAbilities.MAX_BOOST_SPEED);
         playerShockWaveCD.fillAmount = Mathf.Lerp(1, 0, pManager.player.pAbilities.shockWaveCurrentCooldown / PlayerAbilities.SHOCKWAVE_COOLDOWN);
     }
 

@@ -13,7 +13,6 @@ public class WeaponLaser : Weapon
     {
         base.Start();
         _lineRenderer = transform.GetComponent<LineRenderer>();
-        _lineRenderer.startColor = launcher.pManager.playerColor;
         _lineRenderer.endColor = launcher.pManager.playerColor;
     }
 

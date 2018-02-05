@@ -35,6 +35,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         _player = transform.GetComponent<Player>();
         _player.OnResetPlayer += ResetAbilities;
+        SHOCKWAVE_ANIMATION.GetComponent<ParticleSystem>().startColor = _player.pManager.playerColor;
     }
 
     void Update()

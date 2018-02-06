@@ -7,6 +7,8 @@ public class Usable : MonoBehaviour
     public event onUsed OnUsed;
     public delegate void onUsed();
 
+    public bool AUTOMATIC_USE = false;
+
     [HideInInspector]
     public Player launcher;
 

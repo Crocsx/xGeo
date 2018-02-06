@@ -31,11 +31,16 @@ public class PlayerAbilities : MonoBehaviour
     float _shockWaveCurrentCooldown = 0;
     public float shockWaveCurrentCooldown { get { return _shockWaveCurrentCooldown; } }
 
+
     void Start()
     {
         _player = transform.GetComponent<Player>();
         _player.OnResetPlayer += ResetAbilities;
-        SHOCKWAVE_ANIMATION.GetComponent<ParticleSystem>().startColor = _player.pManager.playerColor;
+
+        // Wierd Unity stuff https://docs.unity3d.com/ScriptReference/ParticleSystem.MainModule-startColor.html
+        ParticleSystem ShockwaveEffect = SHOCKWAVE_ANIMATION.GetComponent<ParticleSystem>();
+        var main = ShockwaveEffect.main;
+        main.startColor = _player.pManager.playerColor;
     }
 
     void Update()
@@ -47,14 +52,31 @@ public class PlayerAbilities : MonoBehaviour
     #region Item
     public void GetItem(GameObject droppedItem)
     {
-        if (usableItem)
-            usableItem.Used();
 
         GameObject Item = Instantiate(droppedItem, transform.position, Quaternion.identity);
         Item.transform.parent = transform;
-        usableItem = Item.GetComponent<Usable>();
-        usableItem.launcher = transform.GetComponent<Player>();
-        usableItem.OnUsed += ReleaseItem;
+        Usable ItemUsable = Item.GetComponent<Usable>();
+
+        if (ItemUsable.AUTOMATIC_USE)
+            InstantActivateItem(ItemUsable);
+        else
+            StoreItem(ItemUsable);
+    }
+
+    void InstantActivateItem(Usable ItemUsable)
+    {
+        ItemUsable.launcher = _player;
+        ItemUsable.Use(fireTurret);
+    }
+
+    void StoreItem(Usable ItemUsable)
+    {
+        if (usableItem)
+            usableItem.Used();
+
+        ItemUsable.launcher = _player;
+        ItemUsable.OnUsed += ReleaseItem;
+        usableItem = ItemUsable;
     }
 
     public void ReleaseItem()

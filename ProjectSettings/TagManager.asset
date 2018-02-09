@@ -17,8 +17,8 @@ TagManager:
   - GameElement
   - Terrain
   - Player
+  - Obstacle
   - DeadZone
-  - 
   - 
   - 
   - 

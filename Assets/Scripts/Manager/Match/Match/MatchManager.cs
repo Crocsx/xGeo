@@ -17,6 +17,7 @@ public class MatchManager : MonoBehaviour
     public LayerMask LAYERMASK_DEADZONE;
     public LayerMask LAYERMASK_TERRAIN;
     public LayerMask LAYERMASK_GAMEELEMENT;
+    public LayerMask LAYERMASK_OBSTACLE;
     public LayerMask LAYERMASK_DEFAULT;
 
     bool isGameFinish

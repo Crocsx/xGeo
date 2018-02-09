@@ -17,6 +17,9 @@ public class Player : MonoBehaviour, Damager, Damageable {
     bool _freezed;
     public bool isFreezed { get { return _freezed; } }
 
+    bool _invulnerable;
+    public bool isInvulnerable { get { return _invulnerable; } }
+
     // Components
     PlayerAbilities _pAbilities;
     public PlayerAbilities pAbilities { get { return _pAbilities; } }
@@ -87,6 +90,29 @@ public class Player : MonoBehaviour, Damager, Damageable {
         UnFreeze();
     }
 
+    public void Invulnerable(float timer)
+    {
+        _invulnerable = true;
+        StartCoroutine(InvulnerableTimer(timer));
+    }
+
+    public void Vulnerable()
+    {
+        _invulnerable = false;
+    }
+
+    IEnumerator InvulnerableTimer(float timer)
+    {
+        float currTimer = 0;
+        while (currTimer < timer)
+        {
+            currTimer += TimeManager.instance.time;
+            yield return null;
+        }
+
+        Vulnerable();
+    }
+
     public void Die()
     {
         if(_pDamage.lastHitter != null)
@@ -123,7 +149,8 @@ public class Player : MonoBehaviour, Damager, Damageable {
 
     public void GetDamage(Vector2 dir, float power, PlayerManager hitter)
     {
-        _pDamage.GetDamage(dir, power, hitter);
+        if(!_invulnerable)
+            _pDamage.GetDamage(dir, power, hitter);
     }
 
     public void DealDamage(Player reciever, Vector2 dir, float power)
@@ -142,16 +169,6 @@ public class Player : MonoBehaviour, Damager, Damageable {
     {
         if (OnResetPlayer != null)
             OnResetPlayer();
-    }
-
-    public void Invulnerable()
-    {
-        _pCollider.enabled = false;
-    }
-
-    public void Vulnerable()
-    {
-        _pCollider.enabled = true;
     }
 
     public void Lock()

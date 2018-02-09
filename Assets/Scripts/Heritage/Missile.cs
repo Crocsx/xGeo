@@ -64,7 +64,7 @@ public class Missile : MonoBehaviour, Damager {
     }
 
 
-    void Unspawn()
+    public void Unspawn()
     {
         if(DESTRUCTION_EFFECT != null)
             Instantiate(DESTRUCTION_EFFECT, transform.position, Quaternion.identity);

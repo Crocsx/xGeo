@@ -8,7 +8,7 @@ public class PlayerAbilities : MonoBehaviour
 
     [Header("Fire")]
     public Transform fireTurret;
-    Usable usableItem;
+    Usable storedItem;
 
     [Header("Dash")]
     public const float MAX_BOOST_SPEED = 400;
@@ -71,24 +71,24 @@ public class PlayerAbilities : MonoBehaviour
 
     void StoreItem(Usable ItemUsable)
     {
-        if (usableItem)
-            usableItem.Used();
+        if (storedItem)
+            storedItem.Used();
 
         ItemUsable.launcher = _player;
         ItemUsable.OnUsed += ReleaseItem;
-        usableItem = ItemUsable;
+        storedItem = ItemUsable;
     }
 
     public void ReleaseItem()
     {
-        usableItem.OnUsed -= ReleaseItem;
-        usableItem = null;
+        storedItem.OnUsed -= ReleaseItem;
+        storedItem = null;
     }
 
     public void UseItem()
     {
-        if (usableItem != null)
-            usableItem.Use(fireTurret);
+        if (storedItem != null)
+            storedItem.Use(fireTurret);
     }
     #endregion
 
@@ -164,7 +164,7 @@ public class PlayerAbilities : MonoBehaviour
         _boostAvailable = MAX_BOOST_SPEED;
         _boostCurrentCooldown = 0;
         _shockWaveCurrentCooldown = 0;
-        usableItem = null;
+        storedItem = null;
     }
     #endregion
     private void OnDestroy()

@@ -23,6 +23,7 @@ public class WeaponShield : Usable
     {
         currDuration = 0;
         enable = true;
+        launcher.Invulnerable(SHIELD_DURATION);
         GetComponent<CircleCollider2D>().enabled = true;
     }
 
@@ -34,5 +35,16 @@ public class WeaponShield : Usable
         currDuration += TimeManager.instance.time;
         if(currDuration >= SHIELD_DURATION)
             base.Used();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.GetComponent<Missile>())
+        {
+            Missile missile = collision.transform.GetComponent<Missile>();
+            if (missile.launcher != launcher) 
+                missile.Unspawn();
+            
+        }
     }
 }

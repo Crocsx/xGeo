@@ -47,7 +47,6 @@ public class PlayerManager : MonoBehaviour
         GameManager.instance.OnInitGame += GameInit;
         GameManager.instance.OnStartGame += GameStart;
         GameManager.instance.OnFinishGame += GameFinished;
-        GameManager.instance.OnEndGame += GameEnd;
     }
 
     public void GameInit()
@@ -68,14 +67,6 @@ public class PlayerManager : MonoBehaviour
     public void GameFinished()
     {
         DisablePlayer();
-    }
-
-    public void GameEnd()
-    {
-        GameManager.instance.OnInitGame -= GameInit;
-        GameManager.instance.OnStartGame -= GameStart;
-        GameManager.instance.OnFinishGame -= GameFinished;
-        GameManager.instance.OnEndGame -= GameEnd;
     }
 
     void Respawn()
@@ -143,5 +134,12 @@ public class PlayerManager : MonoBehaviour
     {
         _player.Lock();
         _player.transform.position = new Vector3(2000, 2000, 2000);
+    }
+
+    void OnDestroy()
+    {
+        GameManager.instance.OnInitGame -= GameInit;
+        GameManager.instance.OnStartGame -= GameStart;
+        GameManager.instance.OnFinishGame -= GameFinished;
     }
 }

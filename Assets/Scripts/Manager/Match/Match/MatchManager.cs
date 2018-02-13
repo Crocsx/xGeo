@@ -71,21 +71,39 @@ public class MatchManager : MonoBehaviour
         return ranking;
     }
 
-    void FinishGame()
+    public void FinishGame()
     {
         GameManager.instance.FinishGame();
     }
 
     public void EndGame()
     {
-        MenuIGManager.instance.ReturnMenu();
+        if (GameManager.getState() == GameManager.GameState.PAUSE)
+            GameManager.instance.ResumeGame();
+        GameManager.instance.EndGame();
+    }
+
+    public void ReloadGame()
+    {
+        EndGame();
+        GameManager.instance.ReloadScene();
+    }
+
+    public void ResumeGame()
+    {
+        GameManager.instance.ResumeGame();
+    }
+
+    public void ReturnMenu()
+    {
+        EndGame();
+        GameManager.instance.LoadScene("Menu");
     }
 
     void LoseReferences(string name)
     {
         GameManager.instance.OnReloadScene -= LoseReferences;
         GameManager.instance.OnLoadScene -= LoseReferences;
-        GameManager.instance.EndGame();
         instance = null;
     }
 }

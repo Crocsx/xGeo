@@ -29,7 +29,6 @@ public class MenuIGManager : MonoBehaviour {
         GameManager.instance.OnInitGame += GameInit;
         GameManager.instance.OnFinishGame += FinishGame;
         GameManager.instance.OnEndGame += EndGame;
-        GameManager.instance.OnReloadScene += Reload;
         GameManager.instance.OnPauseGame += ActivateIGPause;
         GameManager.instance.OnResumeGame += DeactivateIGPause;
     }
@@ -46,18 +45,13 @@ public class MenuIGManager : MonoBehaviour {
         ShowStats();
     }
 
-    void Reload(string scene)
-    {
-        EndGame();
-    }
-
     public void EndGame()
     {
-        GameManager.instance.OnPauseGame -= ActivateIGPause;
-        GameManager.instance.OnResumeGame -= DeactivateIGPause;
         GameManager.instance.OnInitGame -= GameInit;
         GameManager.instance.OnFinishGame -= FinishGame;
         GameManager.instance.OnEndGame -= EndGame;
+        GameManager.instance.OnPauseGame -= ActivateIGPause;
+        GameManager.instance.OnResumeGame -= DeactivateIGPause;
         instance = null;
     }
 
@@ -111,20 +105,5 @@ public class MenuIGManager : MonoBehaviour {
     void DeactivateIGPause()
     {
         IGPausePanel.SetActive(false);
-    }
-
-    public void ResumeGame()
-    {
-        GameManager.instance.ResumeGame();
-    }
-
-    public void ReloadGame()
-    {
-        GameManager.instance.ReloadScene();
-    }
-
-    public void ReturnMenu()
-    {
-        GameManager.instance.LoadScene("Menu");
     }
 }

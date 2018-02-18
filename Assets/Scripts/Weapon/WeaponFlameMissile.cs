@@ -21,7 +21,7 @@ public class WeaponFlameMissile : Weapon
             missile.GetComponent<Missile>().launcher = launcher;
 
             currentCooldown = SHOOT_COOLDOWN;
-            currentShoot--;
+            _currentShoot--;
 
             if (currentShoot <= 0)
                 base.Used();

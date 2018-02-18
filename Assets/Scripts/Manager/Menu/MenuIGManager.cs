@@ -82,6 +82,13 @@ public class MenuIGManager : MonoBehaviour {
 
     void DeactivateIGPlayerPanels()
     {
+        for (int i = 0; i < PlayerIGPanel.Length; i++)
+        {
+            if (PlayerIGPanel[i].inUse)
+            {
+                PlayerIGPanel[i].Deactivate();
+            }
+        }
         IGPlayerPanels.SetActive(false);
     }
 

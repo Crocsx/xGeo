@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1151671423562816
 GameObject:
   m_ObjectHideFlags: 1
@@ -62,7 +62,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1566908358763946
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 2
+  m_Text: Player 1
 --- !u!114 &114152302368208578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,6 +180,9 @@ MonoBehaviour:
   isInUse: 0
   panelActive: {fileID: 1146369105034786}
   panelInactive: {fileID: 1566908358763946}
+  playerJoin: {fileID: 8300000, guid: 27d116d7b1cec7041bd003d2b4ba98da, type: 3}
+  playerLeft: {fileID: 8300000, guid: fd033b475e6193f40bdaa16bd86da534, type: 3}
+  audioSource: {fileID: 0}
 --- !u!114 &114530715278592198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,7 +349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -100}
+  m_AnchoredPosition: {x: 100, y: -100}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224628544396570528

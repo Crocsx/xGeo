@@ -6,6 +6,9 @@ public class MatchManager : MonoBehaviour
 {
     public static MatchManager instance;
 
+    [Header("Sound")]
+    public AudioClip MusicIGLoop;
+
     [Header("Spawn")]
     public GameObject[] spawnPosition;
 
@@ -19,6 +22,8 @@ public class MatchManager : MonoBehaviour
     public LayerMask LAYERMASK_GAMEELEMENT;
     public LayerMask LAYERMASK_OBSTACLE;
     public LayerMask LAYERMASK_DEFAULT;
+
+    AudioSource _audioSource;
 
     bool isGameFinish
     {
@@ -41,7 +46,10 @@ public class MatchManager : MonoBehaviour
 
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         GameManager.instance.InitGame();
+        _audioSource.clip = MusicIGLoop;
+        _audioSource.Play();
     }
 
     public Vector3 GetSpawnLocation(int i)

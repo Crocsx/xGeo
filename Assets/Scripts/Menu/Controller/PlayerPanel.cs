@@ -8,7 +8,9 @@ public class PlayerPanel : MonoBehaviour {
     public bool isInUse = false;
     public GameObject panelActive;
     public GameObject panelInactive;
-
+    public AudioClip playerJoin;
+    public AudioClip playerLeft;
+    public AudioSource audioSource;
     PlayerManager playerManager;
 
     public void Activate (PlayerManager pManager)
@@ -17,7 +19,8 @@ public class PlayerPanel : MonoBehaviour {
         panelInactive.SetActive(false);
         panelActive.SetActive(true);
         isInUse = true;
-
+        audioSource.clip = playerJoin;
+        audioSource.Play();
         SetColor();
     }
 
@@ -26,6 +29,8 @@ public class PlayerPanel : MonoBehaviour {
         playerManager = null;
         panelActive.SetActive(false);
         panelInactive.SetActive(true);
+        audioSource.clip = playerLeft;
+        audioSource.Play();
         isInUse = false;
     }
 

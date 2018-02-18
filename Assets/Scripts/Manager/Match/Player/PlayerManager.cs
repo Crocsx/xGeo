@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    public delegate void onPlayerInstantiated();
+    public event onPlayerInstantiated OnPlayerInstantiated;
     public delegate void onPlayerRespawned(Player player);
     public event onPlayerRespawned OnPlayerRespawned;
     public delegate void onPlayerKilled(Player player);
@@ -57,6 +59,9 @@ public class PlayerManager : MonoBehaviour
         Vector3 pos = MatchManager.instance.GetSpawnLocation(playerID);
         _player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<Player>();
         _player.Setup(this);
+
+        if (OnPlayerInstantiated != null)
+            OnPlayerInstantiated();
     }
 
     void GameStart()

@@ -6,6 +6,11 @@ public class PlayerAbilities : MonoBehaviour
 {
     Player _player;
 
+    public delegate void onItemDrop(Usable item);
+    public event onItemDrop OnItemDrop;
+    public delegate void onItemRelease(Usable item);
+    public event onItemRelease OnItemRelease;
+
     [Header("Fire")]
     public Transform fireTurret;
     Usable storedItem;
@@ -36,11 +41,6 @@ public class PlayerAbilities : MonoBehaviour
     {
         _player = transform.GetComponent<Player>();
         _player.OnResetPlayer += ResetAbilities;
-
-        // Wierd Unity stuff https://docs.unity3d.com/ScriptReference/ParticleSystem.MainModule-startColor.html
-        ParticleSystem ShockwaveEffect = SHOCKWAVE_ANIMATION.GetComponent<ParticleSystem>();
-        var main = ShockwaveEffect.main;
-        main.startColor = _player.pManager.playerColor;
     }
 
     void Update()
@@ -74,6 +74,9 @@ public class PlayerAbilities : MonoBehaviour
         if (storedItem)
             storedItem.Used();
 
+        if (OnItemDrop != null)
+            OnItemDrop(ItemUsable);
+
         ItemUsable.launcher = _player;
         ItemUsable.OnUsed += ReleaseItem;
         storedItem = ItemUsable;
@@ -81,6 +84,9 @@ public class PlayerAbilities : MonoBehaviour
 
     public void ReleaseItem()
     {
+        if (OnItemRelease != null)
+            OnItemRelease(storedItem);
+        
         storedItem.OnUsed -= ReleaseItem;
         storedItem = null;
     }
@@ -123,6 +129,11 @@ public class PlayerAbilities : MonoBehaviour
         if (shockWaveCurrentCooldown <= 0)
         {
             _shockWaveCurrentCooldown = SHOCKWAVE_COOLDOWN;
+
+            ParticleSystem ShockwaveEffect = SHOCKWAVE_ANIMATION.GetComponent<ParticleSystem>();
+            var main = ShockwaveEffect.main;
+            main.startColor = _player.pManager.playerColor;
+
             Instantiate(SHOCKWAVE_ANIMATION, transform.position, Quaternion.identity).transform.parent = transform;
             StartCoroutine(ShockWaveEffect());
         }

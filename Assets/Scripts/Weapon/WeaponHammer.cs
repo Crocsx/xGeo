@@ -17,7 +17,7 @@ public class WeaponHammer : Weapon
     protected override void Start()
     {
         base.Start();
-        currentShoot = SHOOT_MAX_NUMBER;
+        _currentShoot = SHOOT_MAX_NUMBER;
         currDuration = 0;
     }
 

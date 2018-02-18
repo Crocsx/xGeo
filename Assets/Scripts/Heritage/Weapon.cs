@@ -9,13 +9,14 @@ public class Weapon : Usable, Damager
     public float SHOOT_COOLDOWN = 1.0f;
     public int SHOOT_MAX_NUMBER = 5;
 
-    protected int currentShoot;
+    public float currentShoot { get { return _currentShoot; } }
+    protected int _currentShoot = 0;
     protected float currentCooldown;
 
     protected override void Start()
     {
         base.Start();
-        currentShoot = SHOOT_MAX_NUMBER;
+        _currentShoot = SHOOT_MAX_NUMBER;
         currentCooldown = 0;
     }
 

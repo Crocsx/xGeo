@@ -22,7 +22,7 @@ public class WeaponFreezer : Weapon {
             missile.GetComponent<Missile>().launcher = launcher;
             missile.GetComponent<Missile>().FREEZE_TIME = FREEZE_TIME;
             currentCooldown = SHOOT_COOLDOWN;
-            currentShoot--;
+            _currentShoot--;
 
             if (currentShoot <= 0)
                 base.Used();

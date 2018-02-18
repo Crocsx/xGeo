@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3872e21f175ce4d887e8d1ccc234da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 9258d8b169456814ea4a9433dba643c9, type: 3}
   AUTOMATIC_USE: 1
   launcher: {fileID: 0}
   SHIELD_DURATION: 5

@@ -33,7 +33,7 @@ public class Missile : MonoBehaviour, Damager {
     {
         if (collider.gameObject == launcher.gameObject)
             return;
-
+        
         if (collider.transform.CompareTag("Player"))
         {
             DealDamage(collider.transform.GetComponent<Player>(), (collider.transform.position - transform.position).normalized, MISSILE_POWER);

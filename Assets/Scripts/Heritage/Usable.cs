@@ -6,7 +6,7 @@ public class Usable : MonoBehaviour
 {
     public event onUsed OnUsed;
     public delegate void onUsed();
-
+    public Sprite icon;
     public bool AUTOMATIC_USE = false;
 
     [HideInInspector]

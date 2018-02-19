@@ -45,8 +45,8 @@ public class PlayerIGPanel : MonoBehaviour {
         playerShockWaveCD.fillAmount = Mathf.Lerp(1, 0, pManager.player.pAbilities.shockWaveCurrentCooldown / PlayerAbilities.SHOCKWAVE_COOLDOWN);
         if (WeaponImage.IsActive())
         {
-            Debug.Log(currentWeapon.currentShoot / currentWeapon.SHOOT_MAX_NUMBER);
-            WeaponRemaining.fillAmount = Mathf.Lerp(1, 0, currentWeapon.currentShoot / currentWeapon.SHOOT_MAX_NUMBER);
+            Debug.Log(Mathf.Lerp(1, 0, currentWeapon.currentShoot / currentWeapon.SHOOT_MAX_NUMBER));
+            WeaponRemaining.fillAmount = Mathf.Lerp(0, 1, currentWeapon.currentShoot / currentWeapon.SHOOT_MAX_NUMBER);
         }
     }
 

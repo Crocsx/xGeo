@@ -106,6 +106,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 9258d8b169456814ea4a9433dba643c9, type: 3}
   - prefab: {fileID: 1644186820760788, guid: 31e0a53d2f2b0954e80f02ca1309f742, type: 2}
     sprite: {fileID: 21300000, guid: 2506187629bc4f04fb7eacf4df016b45, type: 3}
+  - prefab: {fileID: 1783384980336324, guid: f1c8ec5f46ccd8149a7b6a2cdebf7167, type: 2}
+    sprite: {fileID: 21300000, guid: 1f9ee36bae2cfb847b36b79b2507cdb1, type: 3}
 --- !u!212 &212547097938716264
 SpriteRenderer:
   m_ObjectHideFlags: 1

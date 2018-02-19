@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponBomb : MonoBehaviour {
+public class WeaponBomb : Weapon
+{
+    public GameObject Bomb;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+    protected override void Start()
+    {
+        base.Start();
+    }
+
+    public override void Use(Transform fireTurret)
+    {
+        base.Use(fireTurret);
+        if (currentCooldown <= 0)
+        {
+            GameObject bomb = Instantiate(Bomb, fireTurret.position, fireTurret.rotation);
+            bomb.GetComponent<Bomb>().launcher = launcher;
+
+            currentCooldown = SHOOT_COOLDOWN;
+            _currentShoot--;
+
+            if (currentShoot <= 0)
+                base.Used();
+        }
+    }
 }

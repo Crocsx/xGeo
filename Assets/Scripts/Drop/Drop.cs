@@ -11,6 +11,10 @@ public class Item
 
 public class Drop : MonoBehaviour
 {
+
+    public delegate void onItemDroped();
+    public event onItemDroped OnItemDroped;
+
     public Item[] possibleItems;
     Item selectedItem;
     GameObject itemType;
@@ -31,8 +35,11 @@ public class Drop : MonoBehaviour
     {
         if (collider.transform.CompareTag("Player"))
         {
+            if (OnItemDroped != null)
+                OnItemDroped();
+
             collider.transform.GetComponent<Player>().Drop(selectedItem.prefab);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

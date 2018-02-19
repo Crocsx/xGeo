@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropManager : MonoBehaviour {
+public class OldDropManager : MonoBehaviour
+{
 
     public GameObject DroppablePrefab;
-
-    public GameObject spawned;
+    public GameObject DroppableArea;
 
     [Header("Drops Timers")]
+    public float MAX_DROPS_ON_MAP = 6;
     public float MAX_DROP_COOLDOWN_DELTA = 3;
     public float DROP_RATE_COOLDOWN = 5f;
     float dropCurrentCooldown = 0;
@@ -23,7 +24,7 @@ public class DropManager : MonoBehaviour {
         GameManager.instance.OnEndGame += GameEnd;
     }
 
-    void Start ()
+    void Start()
     {
         _active = false;
     }
@@ -40,59 +41,55 @@ public class DropManager : MonoBehaviour {
 
     void GameEnd()
     {
-        Deactivate();
         GameManager.instance.OnStartGame -= GameStart;
         GameManager.instance.OnFinishGame -= GameFinish;
         GameManager.instance.OnEndGame -= GameEnd;
     }
 
-    float GetRandomTime()
+    void Update()
     {
-        return Random.Range(DROP_RATE_COOLDOWN - MAX_DROP_COOLDOWN_DELTA, DROP_RATE_COOLDOWN + MAX_DROP_COOLDOWN_DELTA);
-    }
-
-    void Update () {
-        if (_active && spawned == null) CheckDrop();
+        if (_active) CheckDrop();
     }
 
     void CheckDrop()
     {
-        dropCurrentCooldown -= TimeManager.instance.time;
-        if (dropCurrentCooldown < 0)
+        dropCurrentCooldown += TimeManager.instance.time;
+        if (dropCurrentCooldown > DROP_RATE_COOLDOWN)
         {
             Dropitem();
+            dropCurrentCooldown = 0;
         }
     }
 
     void Dropitem()
     {
-        spawned = Instantiate(DroppablePrefab, transform.position, Quaternion.identity);
-        spawned.GetComponent<Drop>().OnItemDroped += FreeDrop;
+        SpriteRenderer spriteRenderer = DroppableArea.GetComponent<SpriteRenderer>();
+        Vector3 SpawnLocation = GetPointOnDroppableArea(spriteRenderer);
+        Instantiate(DroppablePrefab, SpawnLocation, Quaternion.identity);
     }
 
-    private void FreeDrop()
+    Vector3[] GetSpriteSize(SpriteRenderer sp)
     {
-        if(spawned != null)
-        {
-            spawned.GetComponent<Drop>().OnItemDroped -= FreeDrop;
-            spawned = null;
-        }
-
-        dropCurrentCooldown = GetRandomTime();
+        Vector3 pos = transform.position;
+        Vector3[] array = new Vector3[2];
+        array[0] = pos + sp.bounds.min;
+        array[1] = pos + sp.bounds.max;
+        return array;
     }
+
+    Vector3 GetPointOnDroppableArea(SpriteRenderer sp)
+    {
+        Vector3[] array = GetSpriteSize(sp);
+        return new Vector3(Random.Range(array[0].x, array[1].x), Random.Range(array[0].y, array[1].y), 1);
+    }
+
     public void Activate()
     {
         _active = true;
-        FreeDrop();
     }
 
     public void Deactivate()
     {
-        if (spawned != null)
-            spawned.GetComponent<Drop>().OnItemDroped -= FreeDrop;
-
         _active = false;
     }
-
-
 }

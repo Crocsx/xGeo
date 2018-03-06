@@ -12,7 +12,8 @@ public class PlayerIGPanel : MonoBehaviour {
     public Image playerDashCD;
     public RectTransform playerShockWaveCDContainer;
     public Image playerShockWaveCD;
-
+    public Text life;
+    
     public Image WeaponImage;
     public Image WeaponEmpty;
     public Image WeaponRemaining;
@@ -43,6 +44,8 @@ public class PlayerIGPanel : MonoBehaviour {
         playerMultiplicator.text = Mathf.Floor(pManager.player.pDamage.multiplicator).ToString();
         playerDashCD.fillAmount = Mathf.Lerp(0, 1, pManager.player.pAbilities.boostAvailable / PlayerAbilities.MAX_BOOST_SPEED);
         playerShockWaveCD.fillAmount = Mathf.Lerp(1, 0, pManager.player.pAbilities.shockWaveCurrentCooldown / PlayerAbilities.SHOCKWAVE_COOLDOWN);
+        life.text = pManager.lifeRemaining.ToString();
+        
         if (WeaponImage.IsActive())
         {
             Debug.Log(Mathf.Lerp(1, 0, currentWeapon.currentShoot / currentWeapon.SHOOT_MAX_NUMBER));

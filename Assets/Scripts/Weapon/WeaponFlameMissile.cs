@@ -17,14 +17,21 @@ public class WeaponFlameMissile : Weapon
         base.Use(fireTurret);
         if (currentCooldown <= 0)
         {
-            GameObject missile = Instantiate(flameMissile, fireTurret.position, fireTurret.rotation);
-            missile.GetComponent<Missile>().launcher = launcher;
-
-            currentCooldown = SHOOT_COOLDOWN;
-            _currentShoot--;
-
-            if (currentShoot <= 0)
-                base.Used();
+            Shoot(fireTurret);
         }
+    }
+
+    protected override void Shoot(Transform fireTurret)
+    {
+        base.Shoot(fireTurret);
+
+        GameObject missile = Instantiate(flameMissile, fireTurret.position, fireTurret.rotation);
+        missile.GetComponent<Missile>().launcher = launcher;
+
+        currentCooldown = SHOOT_COOLDOWN;
+        _currentShoot--;
+
+        if (currentShoot <= 0)
+            base.Used();
     }
 }

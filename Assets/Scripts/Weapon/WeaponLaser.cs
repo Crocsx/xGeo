@@ -22,24 +22,32 @@ public class WeaponLaser : Weapon
 
         if (currentCooldown <= 0)
         {
-            LayerMask LayerHitable = (MatchManager.instance.LAYERMASK_PLAYER.value | MatchManager.instance.LAYERMASK_TERRAIN.value);
-
-            RaycastHit2D hit = Physics2D.Raycast(fireTurret.position, fireTurret.right, Mathf.Infinity, LayerHitable);
-
-            if (hit.collider != null  && (hit.collider.CompareTag("Player")))
-            {
-                DealDamage(hit.transform.GetComponent<Player>(), (hit.transform.position - fireTurret.position).normalized, SHOOT_POWER);
-            }
-
-            Vector3[] laserPoints = new Vector3[] { fireTurret.position, hit.point };
-            StartCoroutine(Laser(laserPoints));
-
-            currentCooldown = SHOOT_COOLDOWN;
-            _currentShoot--;
-
-            if (currentShoot <= 0)
-                base.Used();
+            Shoot(fireTurret);
         }
+    }
+
+
+    protected override void Shoot(Transform fireTurret)
+    {
+        base.Shoot(fireTurret);
+
+        LayerMask LayerHitable = (MatchManager.instance.LAYERMASK_PLAYER.value | MatchManager.instance.LAYERMASK_TERRAIN.value);
+
+        RaycastHit2D hit = Physics2D.Raycast(fireTurret.position, fireTurret.right, Mathf.Infinity, LayerHitable);
+
+        if (hit.collider != null && (hit.collider.CompareTag("Player")))
+        {
+            DealDamage(hit.transform.GetComponent<Player>(), (hit.transform.position - fireTurret.position).normalized, SHOOT_POWER);
+        }
+
+        Vector3[] laserPoints = new Vector3[] { fireTurret.position, hit.point };
+        StartCoroutine(Laser(laserPoints));
+
+        currentCooldown = SHOOT_COOLDOWN;
+        _currentShoot--;
+
+        if (currentShoot <= 0)
+            base.Used();
     }
 
     IEnumerator Laser(Vector3[] laserPoints)

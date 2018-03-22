@@ -6,6 +6,7 @@ using UnityEngine;
 public class Item
 {
     public GameObject prefab;
+    public string name;
     public Sprite sprite;
 }
 
@@ -21,6 +22,11 @@ public class Drop : MonoBehaviour
 
     // Use this for initialization
     void Start ()
+    {
+        SpawnElement();
+    }
+
+    void SpawnElement()
     {
         selectedItem = GetRandomItem();
         transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = selectedItem.sprite;

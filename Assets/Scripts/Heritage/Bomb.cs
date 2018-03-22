@@ -5,8 +5,9 @@ using UnityEngine;
 public class Bomb : MonoBehaviour {
 
     public int BOMB_POWER = 90;
-    public float BOMB_TIMER = 5;
+    public float BOMB_TIMER = 2;
     public GameObject DESTRUCTION_EFFECT;
+    public AudioClip soundExplosion;
 
     float missileCurrentTimer;
 
@@ -18,7 +19,6 @@ public class Bomb : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Debug.Log("SPawn");
         missileCurrentTimer = BOMB_TIMER;
         exploded = false;
     }
@@ -44,12 +44,22 @@ public class Bomb : MonoBehaviour {
             Unspawn();
             return;
         }
-        
+
+        PlayExplosionSound();
+
         transform.GetComponent<Collider2D>().enabled = true;
         exploded = true;
         missileCurrentTimer = 0.3f;
     }
 
+    void PlayExplosionSound()
+    {
+        if (soundExplosion == null)
+            return;
+
+        GetComponent<AudioSource>().clip = soundExplosion;
+        GetComponent<AudioSource>().Play();
+    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject == launcher.gameObject)

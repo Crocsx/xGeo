@@ -7,7 +7,7 @@ public class WeaponShield : Usable
     public float SHIELD_DURATION = 5.0f;
     bool enable = false;
     float currDuration = 0;
-
+     
     protected override void Start()
     {
         base.Start();
@@ -24,6 +24,7 @@ public class WeaponShield : Usable
         currDuration = 0;
         enable = true;
         launcher.Invulnerable(SHIELD_DURATION);
+        GetComponent<AudioSource>().Play();
         GetComponent<CircleCollider2D>().enabled = true;
     }
 
@@ -33,8 +34,11 @@ public class WeaponShield : Usable
             return;
 
         currDuration += TimeManager.instance.time;
-        if(currDuration >= SHIELD_DURATION)
+        if (currDuration >= SHIELD_DURATION)
+        {
+            GetComponent<AudioSource>().Stop();
             base.Used();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

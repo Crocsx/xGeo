@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : Usable, Damager
 {
+    public AudioClip soundOnActivation;
 
     public string damagerName { get { return "Weapon"; } }
     public float SHOOT_COOLDOWN = 1.0f;
@@ -35,5 +36,23 @@ public class Weapon : Usable, Damager
     public void DealDamage(Player reciever, Vector2 dir, float power)
     {
         reciever.GetDamage(dir, power, launcher.pManager);
+    }
+
+    protected virtual void Shoot(Transform fireTurret)
+    {
+        Debug.Log("ici");
+        PlaySound(soundOnActivation);
+    }
+
+    void PlaySound(AudioClip sClip)
+    {
+        Debug.Log("la");
+        if (soundOnActivation == null)
+            return;
+
+        GameObject gameObject = new GameObject();
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = sClip;
+        audioSource.Play();
     }
 }

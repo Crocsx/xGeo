@@ -17,14 +17,21 @@ public class WeaponBomb : Weapon
         base.Use(fireTurret);
         if (currentCooldown <= 0)
         {
-            GameObject bomb = Instantiate(Bomb, fireTurret.position, fireTurret.rotation);
-            bomb.GetComponent<Bomb>().launcher = launcher;
-
-            currentCooldown = SHOOT_COOLDOWN;
-            _currentShoot--;
-
-            if (currentShoot <= 0)
-                base.Used();
+            Shoot(fireTurret);
         }
+    }
+
+    protected override void Shoot(Transform fireTurret)
+    {
+        base.Shoot(fireTurret);
+
+        GameObject bomb = Instantiate(Bomb, fireTurret.position, fireTurret.rotation);
+        bomb.GetComponent<Bomb>().launcher = launcher;
+
+        currentCooldown = SHOOT_COOLDOWN;
+        _currentShoot--;
+
+        if (currentShoot <= 0)
+            base.Used();
     }
 }

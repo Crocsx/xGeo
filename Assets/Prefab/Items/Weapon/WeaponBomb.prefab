@@ -54,6 +54,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 1f9ee36bae2cfb847b36b79b2507cdb1, type: 3}
   AUTOMATIC_USE: 0
   launcher: {fileID: 0}
+  soundOnActivation: {fileID: 8300000, guid: 6e8b843583624e8408971c83924a25c1, type: 3}
   SHOOT_COOLDOWN: 0
   SHOOT_MAX_NUMBER: 1
   Bomb: {fileID: 1214568981338220, guid: 83b72771d2910714e96b73c341278c18, type: 2}

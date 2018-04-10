@@ -51,10 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e92563a7f1f85c0478342e98996378ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: c5396414587db0b48b0a8f0d6e610acb, type: 3}
   AUTOMATIC_USE: 0
   launcher: {fileID: 0}
+  soundOnActivation: {fileID: 8300000, guid: 1e6ca899294f9d543a06fd3b88be8e92, type: 3}
   SHOOT_COOLDOWN: 1
-  icon: {fileID: 21300000, guid: c5396414587db0b48b0a8f0d6e610acb, type: 3}
   SHOOT_MAX_NUMBER: 5
   flameMissile: {fileID: 1206919574526100, guid: b1f633a96fdb9c046a91481a570bb0fb,
     type: 2}

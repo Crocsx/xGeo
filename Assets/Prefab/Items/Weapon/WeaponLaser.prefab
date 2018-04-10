@@ -52,10 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1fd0a7563bdb741883eb6fb9830ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 55818a74d22e7934ba059cf94188f0c6, type: 3}
   AUTOMATIC_USE: 0
   launcher: {fileID: 0}
+  soundOnActivation: {fileID: 8300000, guid: 25eec239d3a5b2547aefcc11a1cdd015, type: 3}
   SHOOT_COOLDOWN: 1
-  icon: {fileID: 21300000, guid: 55818a74d22e7934ba059cf94188f0c6, type: 3}
   SHOOT_MAX_NUMBER: 5
   SHOOT_POWER: 200
 --- !u!120 &120096263713199056

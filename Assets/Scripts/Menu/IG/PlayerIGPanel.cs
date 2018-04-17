@@ -48,7 +48,6 @@ public class PlayerIGPanel : MonoBehaviour {
         
         if (WeaponImage.IsActive())
         {
-            Debug.Log(Mathf.Lerp(1, 0, currentWeapon.currentShoot / currentWeapon.SHOOT_MAX_NUMBER));
             WeaponRemaining.fillAmount = Mathf.Lerp(0, 1, currentWeapon.currentShoot / currentWeapon.SHOOT_MAX_NUMBER);
         }
     }

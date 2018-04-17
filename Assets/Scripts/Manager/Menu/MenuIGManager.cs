@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 
 public class MenuIGManager : MonoBehaviour {
 
@@ -15,6 +15,7 @@ public class MenuIGManager : MonoBehaviour {
     public EndGameIGRecapPanel[] PlayerEndGamePanel;
 
     public static MenuIGManager instance;
+    private Button lastSelectedItem;
 
     void Awake()
     {
@@ -112,5 +113,21 @@ public class MenuIGManager : MonoBehaviour {
     void DeactivateIGPause()
     {
         IGPausePanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (IGPlayerPanels.activeSelf == false)
+        {
+            if (EventSystem.current.currentSelectedGameObject == null)
+                lastSelectedItem.GetComponent<Button>().Select();
+            else
+                lastSelectedItem = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+        }
+    }
+
+    public void SetSelection(Button self)
+    {
+        lastSelectedItem = self;
     }
 }

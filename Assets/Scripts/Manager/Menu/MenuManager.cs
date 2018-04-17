@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class PanelInfo
@@ -14,6 +15,7 @@ public class MenuManager : MonoBehaviour {
 
     [Header("Panels")]
     public PanelInfo[] panelInfoList;
+    private Button lastSelectedItem;
 
     Dictionary<string, GameObject> panels = new Dictionary<string, GameObject>();
 
@@ -23,7 +25,7 @@ public class MenuManager : MonoBehaviour {
         {
             panels.Add(panelInfoList[i].name, panelInfoList[i].panel);
         }
-	}
+    }
 
     public void GoTo(string panelName)
     {
@@ -53,4 +55,18 @@ public class MenuManager : MonoBehaviour {
     {
         GameManager.instance.LoadScene(sceneName);
     }
+
+    private void Update()
+    {
+        if (EventSystem.current.currentSelectedGameObject == null)
+            lastSelectedItem.GetComponent<Button>().Select();
+        else
+            lastSelectedItem = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
+    }
+
+    public void SetSelection(Button self)
+    {
+        lastSelectedItem = self;
+    }
+
 }

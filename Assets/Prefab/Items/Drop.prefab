@@ -66,7 +66,7 @@ Transform:
   m_GameObject: {fileID: 1812619120819280}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 4328669921354278}
   m_RootOrder: 0
@@ -85,7 +85,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 2
 --- !u!114 &114486293641430978
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,22 +100,22 @@ MonoBehaviour:
   possibleItems:
   - prefab: {fileID: 1315494517556040, guid: b2a387a31569a564c94c8d73f865ca39, type: 2}
     name: laser
-    sprite: {fileID: 21300000, guid: 55818a74d22e7934ba059cf94188f0c6, type: 3}
+    sprite: {fileID: 21300000, guid: 716e2f0622a52a645b46b88ea23ad8cd, type: 3}
   - prefab: {fileID: 1089077180627834, guid: 67d3987e623ea64459df260682414b02, type: 2}
     name: flame
-    sprite: {fileID: 21300000, guid: c5396414587db0b48b0a8f0d6e610acb, type: 3}
+    sprite: {fileID: 21300000, guid: 4dc89606c6f5912469edff731b593ea0, type: 3}
   - prefab: {fileID: 1279256669889036, guid: 5282f644ab23b04438d9e9dfa3b4d1ae, type: 2}
     name: shield
-    sprite: {fileID: 21300000, guid: 9258d8b169456814ea4a9433dba643c9, type: 3}
+    sprite: {fileID: 21300000, guid: c0de21ab151914f40812b36a968930dc, type: 3}
   - prefab: {fileID: 1644186820760788, guid: 31e0a53d2f2b0954e80f02ca1309f742, type: 2}
     name: freezer
-    sprite: {fileID: 21300000, guid: 2506187629bc4f04fb7eacf4df016b45, type: 3}
+    sprite: {fileID: 21300000, guid: bcb8aa450d99867488e3aeab0d83ba76, type: 3}
   - prefab: {fileID: 1783384980336324, guid: f1c8ec5f46ccd8149a7b6a2cdebf7167, type: 2}
     name: bomb
-    sprite: {fileID: 21300000, guid: 1f9ee36bae2cfb847b36b79b2507cdb1, type: 3}
+    sprite: {fileID: 21300000, guid: 39be8280498ad65429703d976cfef964, type: 3}
   - prefab: {fileID: 1070935527615166, guid: 7abaa28d577370744970165ab2d3d923, type: 2}
     name: seeker
-    sprite: {fileID: 21300000, guid: 27188a8436759db498aa163aaf43b482, type: 3}
+    sprite: {fileID: 21300000, guid: f9006cd715288854ebb1de29f3403361, type: 3}
 --- !u!212 &212547097938716264
 SpriteRenderer:
   m_ObjectHideFlags: 1

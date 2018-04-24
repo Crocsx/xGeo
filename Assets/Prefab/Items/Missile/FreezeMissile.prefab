@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1453238309802512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 622.8, y: 186.49277, z: 0}
+  m_LocalPosition: {x: 43.030884, y: -4.4421496, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +79,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 2.5
 --- !u!96 &96461561393714290
 TrailRenderer:
   serializedVersion: 2
@@ -190,6 +190,9 @@ MonoBehaviour:
   FREEZE_TIME: 1.5
   DESTRUCTION_EFFECT: {fileID: 1255250421057402, guid: 2c988527e96246d4b8b86bba3a52e851,
     type: 2}
+  Tracked: 0
+  Track_FOV: 0
+  Track_Rotation_Speed: 0
   launcher: {fileID: 0}
 --- !u!198 &198243229940814154
 ParticleSystem:
@@ -251,7 +254,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1586601065
+  randomSeed: -328506968
   InitialModule:
     serializedVersion: 3
     enabled: 1

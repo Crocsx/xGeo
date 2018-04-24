@@ -113,6 +113,9 @@ MonoBehaviour:
   - prefab: {fileID: 1783384980336324, guid: f1c8ec5f46ccd8149a7b6a2cdebf7167, type: 2}
     name: bomb
     sprite: {fileID: 21300000, guid: 1f9ee36bae2cfb847b36b79b2507cdb1, type: 3}
+  - prefab: {fileID: 1070935527615166, guid: 7abaa28d577370744970165ab2d3d923, type: 2}
+    name: seeker
+    sprite: {fileID: 21300000, guid: 27188a8436759db498aa163aaf43b482, type: 3}
 --- !u!212 &212547097938716264
 SpriteRenderer:
   m_ObjectHideFlags: 1

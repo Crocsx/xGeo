@@ -49,7 +49,7 @@ public class Bomb : MonoBehaviour {
 
         transform.GetComponent<Collider2D>().enabled = true;
         exploded = true;
-        missileCurrentTimer = 0.3f;
+        missileCurrentTimer = 0.4f;
     }
 
     void PlayExplosionSound()

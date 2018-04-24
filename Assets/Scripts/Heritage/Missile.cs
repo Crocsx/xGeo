@@ -11,6 +11,10 @@ public class Missile : MonoBehaviour, Damager {
     public float FREEZE_TIME = 0f;
     public GameObject DESTRUCTION_EFFECT;
 
+    public bool Tracked;
+    public float Track_FOV;
+    public float Track_Rotation_Speed;
+
     float missileCurrentLife;
 
     [HideInInspector]
@@ -60,9 +64,36 @@ public class Missile : MonoBehaviour, Damager {
 
     void Movement()
     {
-        transform.position += transform.right * MISSILE_SPEED * TimeManager.instance.time;
+        Vector3 newPos;
+
+        newPos = transform.right * MISSILE_SPEED * TimeManager.instance.time;
+
+        if (Tracked)
+        {       
+            GameObject[] players;
+            players = GameObject.FindGameObjectsWithTag("Player");
+
+            foreach (GameObject player in players)
+            {
+                if ((Vector3.Angle(transform.right, player.transform.position) < Track_FOV) && player.GetComponent<Player>() != launcher)
+                {
+                    Vector3 heading = (player.transform.position - transform.position).normalized;
+
+                    RotateToward(heading);
+
+                    newPos = heading * MISSILE_SPEED * TimeManager.instance.time;
+                }
+            }
+        }
+        transform.position += newPos;
     }
 
+    void RotateToward(Vector3 direction)
+    {
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion q = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = Quaternion.Slerp(transform.rotation, q, TimeManager.instance.time * Track_Rotation_Speed);
+    }
 
     public void Unspawn()
     {

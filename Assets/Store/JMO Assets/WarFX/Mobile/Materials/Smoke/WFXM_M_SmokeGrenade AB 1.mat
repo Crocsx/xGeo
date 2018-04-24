@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: WFXM_M_SmokeGrenade AB
+  m_Name: WFXM_M_SmokeGrenade AB 1
   m_Shader: {fileID: 4800000, guid: 09d92980be5e5784abdd803fac1a30e4, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

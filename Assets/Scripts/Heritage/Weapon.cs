@@ -40,13 +40,11 @@ public class Weapon : Usable, Damager
 
     protected virtual void Shoot(Transform fireTurret)
     {
-        Debug.Log("ici");
         PlaySound(soundOnActivation);
     }
 
     void PlaySound(AudioClip sClip)
     {
-        Debug.Log("la");
         if (soundOnActivation == null)
             return;
 

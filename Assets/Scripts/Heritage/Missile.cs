@@ -16,6 +16,7 @@ public class Missile : MonoBehaviour, Damager {
     public float Track_Rotation_Speed;
 
     float missileCurrentLife;
+    bool waitingDestruction;
 
     [HideInInspector]
     public xPlayer launcher;
@@ -29,6 +30,9 @@ public class Missile : MonoBehaviour, Damager {
 	// Update is called once per frame
 	void Update ()
     {
+        if (waitingDestruction)
+            return;
+
         CheckLife();
         Movement();
 	}
@@ -102,6 +106,9 @@ public class Missile : MonoBehaviour, Damager {
 
         transform.GetComponent<Rigidbody2D>().simulated = false;
         transform.GetComponent<Collider2D>().enabled = false;
+        if(transform.GetComponent<ParticleSystem>() != null)
+            transform.GetComponent<ParticleSystem>().Stop();
+        waitingDestruction = true;
 
         Invoke("DestroyMissile", 2);
     }

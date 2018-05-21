@@ -26,6 +26,10 @@ public class WeaponShield : Usable
         launcher.Invulnerable(SHIELD_DURATION);
         GetComponent<AudioSource>().Play();
         GetComponent<CircleCollider2D>().enabled = true;
+
+        ParticleSystem ps = transform.GetChild(0).GetComponent<ParticleSystem>();
+        var particleMain = ps.main;
+        particleMain.startColor = launcher.pManager.playerColor;
     }
 
     void CheckCooldown()

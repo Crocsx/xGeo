@@ -7,6 +7,7 @@ TagManager:
   - Drop
   - UIContainer
   - AssignController
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -55,6 +56,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 216663233
+    locked: 0
+  - name: Shield
+    uniqueID: 600270365
     locked: 0
   - name: UI
     uniqueID: 87322855

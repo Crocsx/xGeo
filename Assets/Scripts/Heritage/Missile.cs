@@ -99,6 +99,15 @@ public class Missile : MonoBehaviour, Damager {
     {
         if(DESTRUCTION_EFFECT != null)
             Instantiate(DESTRUCTION_EFFECT, transform.position, Quaternion.identity);
+
+        transform.GetComponent<Rigidbody2D>().simulated = false;
+        transform.GetComponent<Collider2D>().enabled = false;
+
+        Invoke("DestroyMissile", 2);
+    }
+
+    void DestroyMissile()
+    {
         Destroy(gameObject);
     }
 

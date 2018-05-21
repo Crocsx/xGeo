@@ -45,9 +45,16 @@ public class PlayersManager : MonoBehaviour {
 
     public void RemovePlayer(Player player, int controllerID)
     {
-        /*players.Add(pManager);
-        if (OnRemovePlayer != null)
-            OnRemovePlayer(nPlayer);*/
+        foreach(PlayerManager pManager in players)
+        {
+            if (pManager.playerID == player.id)
+            {
+                players.Remove(pManager);
+                if (OnRemovePlayer != null)
+                    OnRemovePlayer(pManager);
+                break;
+            }
+        }
     }
 
     public void RemoveIDPlayer(PlayerManager pManager)

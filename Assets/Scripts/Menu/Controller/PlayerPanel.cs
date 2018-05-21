@@ -11,7 +11,7 @@ public class PlayerPanel : MonoBehaviour {
     public AudioClip playerJoin;
     public AudioClip playerLeft;
     public AudioSource audioSource;
-    PlayerManager playerManager;
+    public PlayerManager playerManager;
 
     public void Activate (PlayerManager pManager)
     {

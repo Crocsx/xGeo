@@ -29,7 +29,14 @@ public class MenuController : MonoBehaviour
 
     void OnRemovePlayer(PlayerManager pManager)
     {
-
+        for (int i = 0; i < playerPanel.Count; i++)
+        {
+            if (playerPanel[i].isInUse && playerPanel[i].playerManager == pManager)
+            {
+                playerPanel[i].Deactivate();
+                break;
+            }
+        }
     }
 
     void AlreadyConnectedController()

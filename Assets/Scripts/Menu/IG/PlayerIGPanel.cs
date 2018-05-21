@@ -38,7 +38,7 @@ public class PlayerIGPanel : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        playerName.text = "Player" + pManager.playerID;
+        playerName.text = pManager.playerName;
         playerName.color = pManager.playerColor;
         PlayerShip.color = pManager.playerColor;
         playerMultiplicator.text = Mathf.Floor(pManager.player.pDamage.multiplicator).ToString();

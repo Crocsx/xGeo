@@ -17,7 +17,10 @@ public class PlayerDamage : MonoBehaviour {
     {
         _player = transform.GetComponent<xPlayer>();
         _player.OnResetPlayer += ResetDamage;
-        particleFeedbackHit.startColor = _player.pManager.playerColor;
+
+        ParticleSystem ps = particleFeedbackHit.GetComponent<ParticleSystem>();
+        var particleMain = ps.main;
+        particleMain.startColor = _player.pManager.playerColor;
     }
 
     // Update is called once per frame
@@ -33,7 +36,12 @@ public class PlayerDamage : MonoBehaviour {
     {
         particleFeedbackHit.Stop();
         particleFeedbackHit.time = 0;
-        particleFeedbackHit.transform.eulerAngles = new Vector3(-Angle(dir), 0,0);
+
+        ParticleSystem ps = particleFeedbackHit.GetComponent<ParticleSystem>();
+        var ParticleShape = ps.shape;
+        ParticleShape.rotation = new Vector3(0, -Angle(dir), 0);
+
+
         particleFeedbackHit.Play();
     }
 

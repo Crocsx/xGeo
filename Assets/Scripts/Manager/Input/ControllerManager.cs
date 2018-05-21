@@ -87,7 +87,7 @@ public class ControllerManager : MonoBehaviour
     {
         foreach (var j in ReInput.controllers.Joysticks)
         {
-            ReInput.players.GetSystemPlayer().controllers.AddController(j, removeFromOtherPlayers);
+             ReInput.players.GetSystemPlayer().controllers.AddController(j, removeFromOtherPlayers);
         }
     }
 

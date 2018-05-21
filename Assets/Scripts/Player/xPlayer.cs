@@ -130,6 +130,7 @@ public class xPlayer : MonoBehaviour, Damager, Damageable {
     void Input()
     {
         Vector2 dirMoveThumbstick = new Vector2(_pManager.playerController.GetAxis("ThumbstickLeftX"), _pManager.playerController.GetAxis("ThumbstickLeftY"));
+
         Vector2 rotMoveThumbstick = new Vector2(_pManager.playerController.GetAxis("ThumbstickRightY"), _pManager.playerController.GetAxis("ThumbstickRightX"));
         _pMovement.Movement(dirMoveThumbstick);
         _pMovement.Rotation(rotMoveThumbstick);

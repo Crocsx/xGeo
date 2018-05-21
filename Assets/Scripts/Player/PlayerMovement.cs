@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour {
 
     public void Rotation(Vector2 rotation)
     {
+        if (rotation.magnitude < 0.25f)
+            return;
+
         float heading = Mathf.Atan2(rotation. x, rotation.y);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, heading * Mathf.Rad2Deg), MAX_ROTATION_SPEED * TimeManager.instance.time);
     }

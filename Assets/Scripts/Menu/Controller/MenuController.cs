@@ -3,39 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Rewired;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif 
+
 public class MenuController : MonoBehaviour
 {
     public Button startButton;
     public List<PlayerPanel> playerPanel = new List<PlayerPanel>();
+
+    private void Awake()
+    {
+        PlayersManager.instance.OnNewPlayer += AddPlayerPannel;
+        PlayersManager.instance.OnRemovePlayer += OnRemovePlayer;
+    }
+
     // Use this for initialization
     void Start ()
     {
-        CleanPlayerManager();
-
-        InputManager.instance.OnNewController += AddPlayerPannel;
-
-        for (int i = 0; i< InputManager.instance.assignedController.Count; i++)
-        {
-            AddPlayerPannel(InputManager.instance.assignedController[i]);
-        }
+        AlreadyConnectedController();
         startButton.Select();
     }
-	
-    void CleanPlayerManager()
+
+    void OnRemovePlayer(PlayerManager pManager)
     {
-        PlayersManager.instance.RemoveAllPlayers();
+
     }
 
-    void AddPlayerPannel(int controllerID)
+    void AlreadyConnectedController()
+    {
+        for (int i = 0; i < PlayersManager.instance.players.Count; i++)
+        {
+            AddPlayerPannel(PlayersManager.instance.players[i]);
+        }
+    }
+
+    void AddPlayerPannel(PlayerManager pManager)
     {
         for (int i = 0; i < playerPanel.Count; i++)
         {
             if (!playerPanel[i].isInUse)
             {
-                playerPanel[i].Activate(PlayersManager.instance.AddPlayer(controllerID));
+                playerPanel[i].Activate(pManager);
                 break;
             }
         }
@@ -43,7 +54,8 @@ public class MenuController : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputManager.instance.OnNewController -= AddPlayerPannel;
+        PlayersManager.instance.OnNewPlayer -= AddPlayerPannel;
+        PlayersManager.instance.OnRemovePlayer -= OnRemovePlayer;
     }
 }
 

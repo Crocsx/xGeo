@@ -8,7 +8,7 @@ public class TerrainKillZone : MonoBehaviour
     {
         if (collider.transform.CompareTag("Player"))
         {
-            collider.gameObject.GetComponent<Player>().Die();
+            collider.gameObject.GetComponent<xPlayer>().Die();
         }
     }
 }

@@ -184,10 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe460d83439fdd4e890d88f8419723f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MISSILE_POWER: 50
+  MISSILE_POWER: 70
   MISSILE_LIFE_SPAWN: 5
-  MISSILE_SPEED: 50
-  FREEZE_TIME: 1.5
+  MISSILE_SPEED: 55
+  FREEZE_TIME: 2.5
   DESTRUCTION_EFFECT: {fileID: 1255250421057402, guid: 2c988527e96246d4b8b86bba3a52e851,
     type: 2}
   Tracked: 0

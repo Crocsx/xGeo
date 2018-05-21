@@ -18,7 +18,7 @@ public class Missile : MonoBehaviour, Damager {
     float missileCurrentLife;
 
     [HideInInspector]
-    public Player launcher;
+    public xPlayer launcher;
 
     // Use this for initialization
     void Start ()
@@ -40,10 +40,10 @@ public class Missile : MonoBehaviour, Damager {
         
         if (collider.transform.CompareTag("Player"))
         {
-            DealDamage(collider.transform.GetComponent<Player>(), (collider.transform.position - transform.position).normalized, MISSILE_POWER);
+            DealDamage(collider.transform.GetComponent<xPlayer>(), (collider.transform.position - transform.position).normalized, MISSILE_POWER);
             if(FREEZE_TIME > 0)
             {
-                collider.transform.GetComponent<Player>().Freeze(FREEZE_TIME);
+                collider.transform.GetComponent<xPlayer>().Freeze(FREEZE_TIME);
             }
             Unspawn();
         }
@@ -75,7 +75,7 @@ public class Missile : MonoBehaviour, Damager {
 
             foreach (GameObject player in players)
             {
-                if ((Vector3.Angle(transform.right, player.transform.position) < Track_FOV) && player.GetComponent<Player>() != launcher)
+                if ((Vector3.Angle(transform.right, player.transform.position) < Track_FOV) && player.GetComponent<xPlayer>() != launcher)
                 {
                     Vector3 heading = (player.transform.position - transform.position).normalized;
 
@@ -102,7 +102,7 @@ public class Missile : MonoBehaviour, Damager {
         Destroy(gameObject);
     }
 
-    public void DealDamage(Player reciever, Vector2 dir, float power)
+    public void DealDamage(xPlayer reciever, Vector2 dir, float power)
     {
         reciever.GetDamage(dir, power, launcher.pManager);
     }

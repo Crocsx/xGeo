@@ -11,7 +11,7 @@ public class Usable : MonoBehaviour
     public bool AUTOMATIC_USE = false;
 
     [HideInInspector]
-    public Player launcher;
+    public xPlayer launcher;
 
     protected virtual void Start()
     {

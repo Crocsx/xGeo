@@ -33,7 +33,7 @@ public class Weapon : Usable, Damager
             currentCooldown -= TimeManager.instance.time;
     }
 
-    public void DealDamage(Player reciever, Vector2 dir, float power)
+    public void DealDamage(xPlayer reciever, Vector2 dir, float power)
     {
         reciever.GetDamage(dir, power, launcher.pManager);
     }

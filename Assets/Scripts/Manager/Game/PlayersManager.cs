@@ -1,8 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class PlayersManager : MonoBehaviour {
+
+    public delegate void onNewPlayer(PlayerManager pManager);
+    public event onNewPlayer OnNewPlayer;
+
+    public delegate void onRemovePlayer(PlayerManager pManager);
+    public event onRemovePlayer OnRemovePlayer;
 
     public static PlayersManager instance = null;
 
@@ -18,21 +25,32 @@ public class PlayersManager : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
+        ControllerManager.instance.OnNewControllerAssigned += AddPlayer;
+        ControllerManager.instance.OnControllerUnAssigned += RemovePlayer;
+
         DontDestroyOnLoad(transform.gameObject);
     }
     #endregion
 
-    public PlayerManager AddPlayer(int controllerID)
+    public void AddPlayer(Player player, int controllerID)
     {
         GameObject newPlayer = Instantiate(playerManager, transform.position, Quaternion.identity);
         newPlayer.transform.parent = transform;
-        PlayerManager nPlayer= newPlayer.GetComponent<PlayerManager>();
-        nPlayer.playerID = controllerID;
-        players.Add(nPlayer);
-        return nPlayer;
+        PlayerManager pManager = newPlayer.GetComponent<PlayerManager>();
+        pManager.AssignPlayerController(player, controllerID);
+        players.Add(pManager);
+        if (OnNewPlayer != null)
+            OnNewPlayer(pManager);
     }
 
-    public void RemovePlayer(PlayerManager pManager)
+    public void RemovePlayer(Player player, int controllerID)
+    {
+        /*players.Add(pManager);
+        if (OnRemovePlayer != null)
+            OnRemovePlayer(nPlayer);*/
+    }
+
+    public void RemoveIDPlayer(PlayerManager pManager)
     {
         for (int i = 0; i < players.Count; i++) if (pManager == players[i]) players.RemoveAt(i);
     }
@@ -44,6 +62,14 @@ public class PlayersManager : MonoBehaviour {
             Destroy(players[i].gameObject);
         }
         players.Clear();
+    }
+
+    public void ResetAllPlayers()
+    {
+        for (var i = 0; i < players.Count; i++)
+        {
+            players[i].reset();
+        }
     }
 
     public int PlayersStillAlive()

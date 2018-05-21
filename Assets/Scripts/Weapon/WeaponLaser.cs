@@ -37,7 +37,7 @@ public class WeaponLaser : Weapon
 
         if (hit.collider != null && (hit.collider.CompareTag("Player")))
         {
-            DealDamage(hit.transform.GetComponent<Player>(), (hit.transform.position - fireTurret.position).normalized, SHOOT_POWER);
+            DealDamage(hit.transform.GetComponent<xPlayer>(), (hit.transform.position - fireTurret.position).normalized, SHOOT_POWER);
         }
 
         Vector3[] laserPoints = new Vector3[] { fireTurret.position, hit.point };

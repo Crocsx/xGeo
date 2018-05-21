@@ -6,5 +6,5 @@ public interface Damager
 {
     string damagerName { get; }
 
-    void DealDamage(Player reciever, Vector2 dir, float power);
+    void DealDamage(xPlayer reciever, Vector2 dir, float power);
 }

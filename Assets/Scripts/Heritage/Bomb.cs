@@ -14,7 +14,7 @@ public class Bomb : MonoBehaviour {
     bool exploded;
 
     [HideInInspector]
-    public Player launcher;
+    public xPlayer launcher;
 
     // Use this for initialization
     void Start()
@@ -67,7 +67,7 @@ public class Bomb : MonoBehaviour {
 
         if (collider.transform.CompareTag("Player"))
         {
-            DealDamage(collider.transform.GetComponent<Player>(), (collider.transform.position - transform.position).normalized, BOMB_POWER);
+            DealDamage(collider.transform.GetComponent<xPlayer>(), (collider.transform.position - transform.position).normalized, BOMB_POWER);
             Unspawn();
         }
 
@@ -84,7 +84,7 @@ public class Bomb : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    public void DealDamage(Player reciever, Vector2 dir, float power)
+    public void DealDamage(xPlayer reciever, Vector2 dir, float power)
     {
         reciever.GetDamage(dir, power, launcher.pManager);
     }

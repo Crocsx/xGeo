@@ -69,4 +69,8 @@ public class MenuManager : MonoBehaviour {
         lastSelectedItem = self;
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

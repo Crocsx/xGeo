@@ -6,15 +6,18 @@ public class PlayerDamage : MonoBehaviour {
 
     public float multiplicator { get { return _multiplicator; } }
     float _multiplicator = 0;
-    Player _player;
+    xPlayer _player;
 
     [HideInInspector]
     public PlayerManager lastHitter;
 
+    public ParticleSystem particleFeedbackHit;
+
     void Start()
     {
-        _player = transform.GetComponent<Player>();
+        _player = transform.GetComponent<xPlayer>();
         _player.OnResetPlayer += ResetDamage;
+        particleFeedbackHit.startColor = _player.pManager.playerColor;
     }
 
     // Update is called once per frame
@@ -23,6 +26,15 @@ public class PlayerDamage : MonoBehaviour {
         lastHitter = hitter;
         _multiplicator += power / 10;
         _player.pRigidbody.AddForce(dir * power * _multiplicator);
+        FeedbackHitParticle(dir);
+    }
+
+    void FeedbackHitParticle(Vector2 dir)
+    {
+        particleFeedbackHit.Stop();
+        particleFeedbackHit.time = 0;
+        particleFeedbackHit.transform.eulerAngles = new Vector3(-Angle(dir), 0,0);
+        particleFeedbackHit.Play();
     }
 
     void ResetDamage()
@@ -33,5 +45,17 @@ public class PlayerDamage : MonoBehaviour {
     private void OnDestroy()
     {
         _player.OnResetPlayer -= ResetDamage;
+    }
+
+    public static float Angle(Vector2 p_vector2)
+    {
+        if (p_vector2.x < 0)
+        {
+            return 360 - (Mathf.Atan2(p_vector2.x, p_vector2.y) * Mathf.Rad2Deg * -1);
+        }
+        else
+        {
+            return Mathf.Atan2(p_vector2.x, p_vector2.y) * Mathf.Rad2Deg;
+        }
     }
 }

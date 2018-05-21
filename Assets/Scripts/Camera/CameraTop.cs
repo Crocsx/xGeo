@@ -6,7 +6,7 @@ public class CameraTop : MonoBehaviour {
 
 
     #region Parameters
-    public List<Player> players;
+    public List<xPlayer> players;
 
     [Header("Speed")]
     public float cameraSpeed = 3;
@@ -112,7 +112,7 @@ public class CameraTop : MonoBehaviour {
         return maxDistance;
     }
 
-    void AddPlayer(Player player)
+    void AddPlayer(xPlayer player)
     {
         if (players.Contains(player))
             return;
@@ -120,7 +120,7 @@ public class CameraTop : MonoBehaviour {
         players.Add(player);
     }
 
-    void RemovePlayer(Player player)
+    void RemovePlayer(xPlayer player)
     {
         if (players.Contains(player))
             players.Remove(player);

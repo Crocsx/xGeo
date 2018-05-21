@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAbilities : MonoBehaviour
 {
-    Player _player;
+    xPlayer _player;
 
     public delegate void onItemDrop(Usable item);
     public event onItemDrop OnItemDrop;
@@ -39,7 +39,7 @@ public class PlayerAbilities : MonoBehaviour
 
     void Start()
     {
-        _player = transform.GetComponent<Player>();
+        _player = transform.GetComponent<xPlayer>();
         _player.OnResetPlayer += ResetAbilities;
     }
 
@@ -154,7 +154,7 @@ public class PlayerAbilities : MonoBehaviour
                 {
                     Vector2 dir = (hitColliders[i].transform.position - transform.position).normalized;
                     float power = (SHOCKWAVE_MAX_STRENGHT * (timer / SHOCKWAVE_DURATION));
-                    _player.DealDamage(hitColliders[i].transform.GetComponent<Player>(), dir, power);
+                    _player.DealDamage(hitColliders[i].transform.GetComponent<xPlayer>(), dir, power);
                 }
                 i++;
             }

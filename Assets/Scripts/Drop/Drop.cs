@@ -44,7 +44,7 @@ public class Drop : MonoBehaviour
             if (OnItemDroped != null)
                 OnItemDroped();
 
-            collider.transform.GetComponent<Player>().Drop(selectedItem.prefab);
+            collider.transform.GetComponent<xPlayer>().Drop(selectedItem.prefab);
             Destroy(gameObject);
         }
     }

@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MISSILE_POWER: 90
   MISSILE_LIFE_SPAWN: 5
-  MISSILE_SPEED: 52
+  MISSILE_SPEED: 70
   FREEZE_TIME: 0
   DESTRUCTION_EFFECT: {fileID: 1023196324455768, guid: ebcd0d1c7d02c4f4cbbffb0c18e3dfe6,
     type: 2}

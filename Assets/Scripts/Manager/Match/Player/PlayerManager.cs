@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rewired;
 
 public class PlayerManager : MonoBehaviour
 {
     public delegate void onPlayerInstantiated();
     public event onPlayerInstantiated OnPlayerInstantiated;
-    public delegate void onPlayerRespawned(Player player);
+    public delegate void onPlayerRespawned(xPlayer player);
     public event onPlayerRespawned OnPlayerRespawned;
-    public delegate void onPlayerKilled(Player player);
+    public delegate void onPlayerKilled(xPlayer player);
     public event onPlayerKilled OnPlayerKilled;
 
     [Header("Spawn")]
@@ -36,13 +37,17 @@ public class PlayerManager : MonoBehaviour
     int _score = 0;
 
     [Header("Params")]
-    public int playerID;
     public Color playerColor;
     public GameObject playerPrefab;
 
-    public Player player { get { return _player; } }
-    Player _player;
+    public xPlayer player { get { return _player; } }
+    xPlayer _player;
 
+    public int playerID { get { return _playerID; } }
+    int _playerID;
+
+    public Player playerController { get { return _playerController; } }
+    Player _playerController;
 
     void Awake()
     {
@@ -53,15 +58,30 @@ public class PlayerManager : MonoBehaviour
 
     public void GameInit()
     {
-        _lifeRemaining = MAX_LIFE;
-        _kill = 0;
         MenuIGManager.instance.RequestPanel(this);
         Vector3 pos = MatchManager.instance.GetSpawnLocation(playerID);
-        _player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<Player>();
+        _player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<xPlayer>();
         _player.Setup(this);
+
+        _playerController = ReInput.players.GetPlayer(playerID);
 
         if (OnPlayerInstantiated != null)
             OnPlayerInstantiated();
+    }
+
+    public void reset()
+    {
+        _lifeRemaining = MAX_LIFE;
+        _kill = 0;
+
+        if(_player != null)
+            Destroy(_player);
+    }
+
+    public void AssignPlayerController(Player pController, int pID)
+    {
+        _playerController = playerController;
+        _playerID = pID;
     }
 
     void GameStart()

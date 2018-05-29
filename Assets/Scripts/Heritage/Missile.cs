@@ -12,8 +12,10 @@ public class Missile : MonoBehaviour, Damager {
     public GameObject DESTRUCTION_EFFECT;
 
     public bool Tracked;
+    GameObject TrackedTarget;
     public float Track_FOV;
     public float Track_Rotation_Speed;
+    public float Track_Detection_Timer;
 
     float missileCurrentLife;
     bool waitingDestruction;
@@ -25,6 +27,8 @@ public class Missile : MonoBehaviour, Damager {
     void Start ()
     {
         missileCurrentLife = MISSILE_LIFE_SPAWN;
+        if (Tracked)
+            StartCoroutine(FindTargetToTrack());
     }
 
 	// Update is called once per frame
@@ -72,24 +76,37 @@ public class Missile : MonoBehaviour, Damager {
 
         newPos = transform.right * MISSILE_SPEED * TimeManager.instance.time;
 
-        if (Tracked)
-        {       
-            GameObject[] players;
-            players = GameObject.FindGameObjectsWithTag("Player");
+        if (Tracked && TrackedTarget != null)
+        {
+            Vector3 heading = (TrackedTarget.transform.position - transform.position).normalized;
+            RotateToward(heading);
+            newPos = heading * MISSILE_SPEED * TimeManager.instance.time;
+        }
 
-            foreach (GameObject player in players)
+        transform.position += newPos;
+    }
+
+    IEnumerator FindTargetToTrack()
+    {
+        float timer = 0;
+        while (timer < Track_Detection_Timer)
+        {
+            if(TrackedTarget == null)
             {
-                if ((Vector3.Angle(transform.right, player.transform.position) < Track_FOV) && player.GetComponent<xPlayer>() != launcher)
+                GameObject[] players;
+                players = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject player in players)
                 {
-                    Vector3 heading = (player.transform.position - transform.position).normalized;
-
-                    RotateToward(heading);
-
-                    newPos = heading * MISSILE_SPEED * TimeManager.instance.time;
+                    if ((Vector3.Angle(transform.right, player.transform.position) < Track_FOV) && player.GetComponent<xPlayer>() != launcher)
+                    {
+                        TrackedTarget = player;
+                    }
                 }
             }
+
+            timer += TimeManager.instance.time;
+            yield return null;
         }
-        transform.position += newPos;
     }
 
     void RotateToward(Vector3 direction)
@@ -106,8 +123,10 @@ public class Missile : MonoBehaviour, Damager {
 
         transform.GetComponent<Rigidbody2D>().simulated = false;
         transform.GetComponent<Collider2D>().enabled = false;
+
         if(transform.GetComponent<ParticleSystem>() != null)
             transform.GetComponent<ParticleSystem>().Stop();
+
         waitingDestruction = true;
 
         Invoke("DestroyMissile", 2);

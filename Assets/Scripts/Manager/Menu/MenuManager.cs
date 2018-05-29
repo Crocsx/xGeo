@@ -29,6 +29,9 @@ public class MenuManager : MonoBehaviour {
 
     public void GoTo(string panelName)
     {
+        if (ControllerManager.instance.assignedController.Count <= 0)
+            return;
+
         CloseAllPannel();
         GameObject panel;
         if(panels.TryGetValue(panelName, out panel))

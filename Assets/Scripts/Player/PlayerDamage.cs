@@ -28,7 +28,7 @@ public class PlayerDamage : MonoBehaviour {
     {
         lastHitter = hitter;
         _multiplicator += power / 10;
-        //_player.pRigidbody.AddForce(dir * power * _multiplicator);
+        _player.pRigidbody.AddForce(dir * power * _multiplicator);
         FeedbackHitParticle(dir);
     }
 

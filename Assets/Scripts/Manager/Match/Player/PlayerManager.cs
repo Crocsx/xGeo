@@ -60,7 +60,7 @@ public class PlayerManager : MonoBehaviour
 
     public void GameInit()
     {
-        playerName = "Player " + _playerID;
+        playerName = "Player " + (_playerID+1);
         MenuIGManager.instance.RequestPanel(this);
         Vector3 pos = MatchManager.instance.GetSpawnLocation(playerID);
         _player = Instantiate(playerPrefab, pos, Quaternion.identity).GetComponent<xPlayer>();

@@ -27,6 +27,7 @@ public class Missile : MonoBehaviour, Damager {
     void Start ()
     {
         missileCurrentLife = MISSILE_LIFE_SPAWN;
+
         if (Tracked)
             StartCoroutine(FindTargetToTrack());
     }
@@ -97,7 +98,13 @@ public class Missile : MonoBehaviour, Damager {
                 players = GameObject.FindGameObjectsWithTag("Player");
                 foreach (GameObject player in players)
                 {
-                    if ((Vector3.Angle(transform.right, player.transform.position) < Track_FOV) && player.GetComponent<xPlayer>() != launcher)
+                    if (player.GetComponent<xPlayer>() == launcher)
+                        continue;
+
+                    Vector3 heading = player.transform.position - transform.position;
+                    float distance = heading.magnitude;
+                    Vector3 direction = heading / distance;
+                    if ((Vector3.Angle(transform.right, player.transform.position) < Track_FOV))
                     {
                         TrackedTarget = player;
                     }

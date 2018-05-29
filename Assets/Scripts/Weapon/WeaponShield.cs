@@ -27,9 +27,13 @@ public class WeaponShield : Usable
         GetComponent<AudioSource>().Play();
         GetComponent<CircleCollider2D>().enabled = true;
 
-        ParticleSystem ps = transform.GetChild(0).GetComponent<ParticleSystem>();
+        ParticleSystem ps = transform.GetComponent<ParticleSystem>();
+        ps.Stop();
+
         var particleMain = ps.main;
         particleMain.startColor = launcher.pManager.playerColor;
+
+        ps.Play();
     }
 
     void CheckCooldown()

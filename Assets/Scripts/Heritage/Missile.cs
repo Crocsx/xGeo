@@ -104,7 +104,7 @@ public class Missile : MonoBehaviour, Damager {
                     Vector3 heading = player.transform.position - transform.position;
                     float distance = heading.magnitude;
                     Vector3 direction = heading / distance;
-                    if ((Vector3.Angle(transform.right, player.transform.position) < Track_FOV))
+                    if ((Vector3.Angle(transform.right, heading) < Track_FOV))
                     {
                         TrackedTarget = player;
                     }

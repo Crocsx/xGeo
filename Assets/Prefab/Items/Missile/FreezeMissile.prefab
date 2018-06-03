@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1453238309802512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 149.12, y: -21.8139, z: 0}
+  m_LocalPosition: {x: -53.307266, y: 4.4087524, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +79,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 3.5
 --- !u!96 &96461561393714290
 TrailRenderer:
   serializedVersion: 2
@@ -193,13 +193,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MISSILE_POWER: 70
   MISSILE_LIFE_SPAWN: 5
-  MISSILE_SPEED: 55
+  MISSILE_SPEED: 65
   FREEZE_TIME: 2.5
   DESTRUCTION_EFFECT: {fileID: 1095257527467538, guid: c6c3e214a306654479b9782a0465e5db,
     type: 2}
   Tracked: 0
   Track_FOV: 0
   Track_Rotation_Speed: 0
+  Track_Detection_Timer: 0
   launcher: {fileID: 0}
 --- !u!198 &198243229940814154
 ParticleSystem:

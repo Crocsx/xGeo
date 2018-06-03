@@ -67,7 +67,8 @@ public class Bomb : MonoBehaviour {
 
         if (collider.transform.CompareTag("Player"))
         {
-            DealDamage(collider.transform.GetComponent<xPlayer>(), (collider.transform.position - transform.position).normalized, BOMB_POWER);
+            float power = (1 - (Vector3.Distance(collider.transform.position, transform.position) / transform.GetComponent<CircleCollider2D>().radius)) * BOMB_POWER;
+            DealDamage(collider.transform.GetComponent<xPlayer>(), (collider.transform.position - transform.position).normalized, power);
             Unspawn();
         }
 

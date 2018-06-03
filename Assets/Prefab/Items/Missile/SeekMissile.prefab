@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1206919574526100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 311.37, y: -8.674764, z: 0}
+  m_LocalPosition: {x: -51.98976, y: 5.500404, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 3
 --- !u!114 &114977929187955634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MISSILE_POWER: 90
   MISSILE_LIFE_SPAWN: 5
-  MISSILE_SPEED: 70
+  MISSILE_SPEED: 75
   FREEZE_TIME: 0
   DESTRUCTION_EFFECT: {fileID: 1639119751743590, guid: 95d94316a1668254a907fcc3b51f75e2,
     type: 2}
